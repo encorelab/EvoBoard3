@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    background-color: white;
+}
+
+#evoboard-container {
+    position: absolute;
+    top: 0px;
+    bottom: 5px;
+    right: 0px;
+    left: 0px;
+}

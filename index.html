@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>EvoRoom</title>
+
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,height=device-height" />
+  
+  <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
+
+  <link href="css/evoboard.css" rel="stylesheet" type="text/css" /> 
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+        
+  <script src="js/sail.js/sail.js"></script>
+  <script src="js/swfobject.js"></script>
+  
+  <script>
+    Sail.load()
+      .then('js/sail.js/rollcall.js')
+      .then('js/swfobject.js')
+      .then('js/evoboard.js')
+      .thenRun(function() { 
+        return Sail.init(EvoBoard);
+    });
+  </script>
+</head>
+<body>
+  <div id="evoboard-container">
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="evoboard" style="display: none">
+      <param name="movie" value="evoboard.swf" />
+      <param name="allowscriptaccess" value="true" />
+      <object type="application/x-shockwave-flash" data="evoboard.swf" width="100%" height="100%" allowscriptaccess="true">
+      </object>
+    </object>
+  </div>
+</body>
+</html>
