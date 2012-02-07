@@ -13,10 +13,10 @@ var EvoBoard = {
         sail: {
             student_submitted_data: passSailEventToFlash,
             some_other_event: passSailEventToFlash,
-	    organism_present: passSailEventToFlash,
-	    rainforest_guess_submitted: passSailEventToFlash,
-	    rankings_submitted: passSailEventToFlash,
-	    rationale_submitted: passSailEventToFlash
+	    	organism_observation: passSailEventToFlash,
+	    	note: passSailEventToFlash,
+	    	observation_tabulation: passSailEventToFlash,
+	    	concept_discussion: passSailEventToFlash
         },
         
         initialized: function(ev) {

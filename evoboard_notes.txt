@@ -1,0 +1,67 @@
+organism_observation
+
+{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"150mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"100mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"50mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"25mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"10mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"5mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"2mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"present","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+
+{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Linneaus"}}
+{"eventType":"organism_observation","payload":{"time":"150mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Linneaus"}}
+
+{"eventType":"organism_observation","payload":{"time":"150mya","assigned_organism":"gibbon", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"100mya","assigned_organism":"gibbon", "observed_organism":"ape","team_name":"Darwin"}}
+
+{"eventType":"organism_observation","payload":{"time":"50mya","assigned_organism":"proboscis_monkey", "observed_organism":"prosimians","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"25mya","assigned_organism":"proboscis_monkey", "observed_organism":"first monkeys","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"10mya","assigned_organism":"proboscis_monkey", "observed_organism":"asian colobine","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"5mya","assigned_organism":"proboscis_monkey", "observed_organism":"asian colobine","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"2mya","assigned_organism":"proboscis_monkey", "observed_organism":"proboscis monkey","team_name":"Darwin"}}
+
+{"eventType":"organism_observation","payload":{"time":"100mya","assigned_organism":"bornean_orangutan", "observed_organism":"first monkeys","team_name":"Darwin"}}
+
+{"eventType":"organism_observation","payload":{"time":"50mya","assigned_organism":"bornean_orangutan", "observed_organism":"prosimians","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"25mya","assigned_organism":"bornean_orangutan", "observed_organism":"first monkeys","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"10mya","assigned_organism":"bornean_orangutan", "observed_organism":"first apes","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"5mya","assigned_organism":"bornean_orangutan", "observed_organism":"first apes","team_name":"Darwin"}}
+
+{"eventType":"organism_observation","payload":{"time":"100mya","assigned_organism":"pheasant", "observed_organism":"ancient birds","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"50mya","assigned_organism":"pheasant", "observed_organism":"pittidae","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"25mya","assigned_organism":"pheasant", "observed_organism":"pitta","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"10mya","assigned_organism":"pheasant", "observed_organism":"pitta","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"5mya","assigned_organism":"pheasant", "observed_organism":"blue-headed pitta","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"2mya","assigned_organism":"pheasant", "observed_organism":"blue-headed pitta","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"present","assigned_organism":"pheasant", "observed_organism":"blue-headed pitta","team_name":"Darwin"}}
+
+---
+note
+
+{"eventType":"note", "payload":{"author":"Luis", "specialty":"primates", "team_name":"Darwin", "note":"foo"}}
+{"eventType":"note", "payload":{"author":"Amy", "specialty":"plants_and_insects", "team_name":"Linneaus", "explanation":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel aliquam ligula. Maecenas vestibulum laoreet semper. Fusce imperdiet dapibus eros non vulputate. Mauris suscipit, lectus eu imperdiet facilisis, eros eros vehicula ipsum, a tincidunt augue massa a lacus. Aliquam egestas, massa vitae pretium gravida, mauris ligula interdum elit, et aliquet nunc urna vel orci. Aliquam vel libero orci, eu scelerisque augue. Phasellus vel arcu non sapien fringilla consectetur sit amet non est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In molestie tincidunt urna sit amet venenatis. Quisque mollis justo sed nisi bibendum ornare. Fusce diam enim, tincidunt nec dignissim ac, venenatis sed dolor. Morbi lacus ligula, laoreet et commodo eget, tempus id lectus. Nam vestibulum viverra odio, semper aliquet urna venenatis sit amet."}}
+
+
+---
+observation_tabulation
+
+{"eventType":"observation_tabulation","payload":{"assigned_organism":"proboscis_monkey","team_name":"Darwin","rainforest":"borneo"}}
+
+---
+concept_discussion
+
+{"eventType":"concept_discussion", "payload":{"author":"Luis", "concept":"Natural selection", "tag_list":["200mya"], "explanation":"foo"}}
+
+---
+{"eventType":"rankings_submitted", "payload":{"group_code":"A1", "author":"joe", "ranks":{"rainforest_a":"2", "rainforest_b":"4", "rainforest_a":"2", "rainforest_c":"1", "rainforest_d":"3"}}}
+
+{"eventType":"rankings_submitted", "payload":{"group_code":"A2", "author":"joe", "ranks":{"rainforest_a":"2", "rainforest_b":"4", "rainforest_a":"2", "rainforest_c":"1", "rainforest_d":"3"}}}
+
+{"eventType":"rankings_submitted", "payload":{"group_code":"A3", "author":"joe", "ranks":{"rainforest_a":"2", "rainforest_b":"4", "rainforest_a":"2", "rainforest_c":"1", "rainforest_d":"3"}}}
+
+{"eventType":"rankings_submitted", "payload":{"group_code":"A4", "author":"joe", "ranks":{"rainforest_a":"2", "rainforest_b":"4", "rainforest_a":"2", "rainforest_c":"1", "rainforest_d":"3"}}}
+
+---
+{"eventType":"rationale_submitted", "payload":{"group_code":"A1", "author":"jane", "question":"strategy", "answer":"foo"}}

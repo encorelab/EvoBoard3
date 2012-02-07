@@ -34,23 +34,23 @@ package classes
 			//group_code = "A1" - group_code.substr(1) should return "1"
 			var group_num:String = group_code.substr(1);	
 				
-			var entryA:TableEntry;
-			entryA = new TableEntry( group_num, "rainforest_a", rankA );
+			var entryA:NoteEntry;
+			entryA = new NoteEntry( group_num, "rainforest_a", rankA );
 			addChild( entryA );
 			rainforestA_entries.push( entryA );	
 			
-			var entryB:TableEntry;
-			entryB = new TableEntry( group_num, "rainforest_b", rankB );
+			var entryB:NoteEntry;
+			entryB = new NoteEntry( group_num, "rainforest_b", rankB );
 			addChild( entryB );
 			rainforestB_entries.push( entryB );
 					
-			var entryC:TableEntry;
-			entryC = new TableEntry( group_num, "rainforest_c", rankC );
+			var entryC:NoteEntry;
+			entryC = new NoteEntry( group_num, "rainforest_c", rankC );
 			addChild( entryC );
 			rainforestC_entries.push( entryC );
 						
-			var entryD:TableEntry;
-			entryD = new TableEntry( group_num, "rainforest_d", rankD );
+			var entryD:NoteEntry;
+			entryD = new NoteEntry( group_num, "rainforest_d", rankD );
 			addChild( entryD );
 			rainforestD_entries.push( entryD );
 		}

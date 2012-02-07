@@ -13,7 +13,7 @@ package classes
 			addChild( organism_vis );
 			*/
 			//for STEP2
-			guess_table = new GuessTable();
+			guess_table = new MeetupDisplay();
 			addChild( guess_table );
 			/*
 			//for STEP4 ranking
