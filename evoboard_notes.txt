@@ -1,3 +1,14 @@
+//cladogram.addEntry("old monkey", "proboscis monkey", "Darwin", "200mya");
+//cladogram.addEntry("old monkey", "proboscis monkey", "Darwin", "50mya");
+//cladogram.addEntry("monkey", "proboscis monkey", "Linneaus", "200mya");
+//cladogram.addEntry("monkey", "proboscis monkey", "Linneaus", "25mya");
+//cladogram.addEntry("monkey", "proboscis monkey", "Darwin", "150mya");
+//cladogram.addEntry("monkey", "proboscis monkey", "Darwin", "5mya");
+//cladogram.addEntry("monkey", "proboscis monkey", "Darwin", "100mya");
+//cladogram.addEntry("monkey", "proboscis monkey", "Darwin", "2mya");
+							
+---						
+
 organism_observation
 
 {"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
@@ -47,21 +58,21 @@ note
 ---
 observation_tabulation
 
-{"eventType":"observation_tabulation","payload":{"assigned_organism":"proboscis_monkey","team_name":"Darwin","rainforest":"borneo"}}
+{"eventType":"observation_tabulation", "payload":{"team_name":"Darwin", "location":"Borneo", "organism_presence":["proboscis_monkey", "civet", "ant" ]}}
+
+---
+organism_features
+
+{"eventType":"organism_features", "payload":{"author":"Luis", "organism":"civet", "team_name":"Darwin", "explanation":"foo"}}
+
+{"eventType":"organism_features", "payload":{"author":"Luis", "organism":"civet", "team_name":"Darwin", "explanation":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel aliquam ligula. Maecenas vestibulum laoreet semper. Fusce imperdiet dapibus eros non vulputate. Mauris suscipit, lectus eu imperdiet facilisis, eros eros vehicula ipsum, a tincidunt augue massa a lacus. Aliquam egestas, massa vitae pretium gravida, mauris ligula interdum elit, et aliquet nunc urna vel orci. Aliquam vel libero orci, eu scelerisque augue. Phasellus vel arcu non sapien fringilla consectetur sit amet non est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In molestie tincidunt urna sit amet venenatis. Quisque mollis justo sed nisi bibendum ornare. Fusce diam enim, tincidunt nec dignissim ac, venenatis sed dolor. Morbi lacus ligula, laoreet et commodo eget, tempus id lectus. Nam vestibulum viverra odio, semper aliquet urna venenatis sit amet."}}
+
 
 ---
 concept_discussion
 
-{"eventType":"concept_discussion", "payload":{"author":"Luis", "concept":"Natural selection", "tag_list":["200mya"], "explanation":"foo"}}
+//conceptsDisplay.addEntry( eventData.author, eventData.concept, eventData.organism, eventData.time, eventData.explanation );
+{"eventType":"concept_discussion", "payload":{"author":"Luis", "concept":"Natural selection", "time":["200mya"], "organism":["fig"], "explanation":"foo"}}
+
 
 ---
-{"eventType":"rankings_submitted", "payload":{"group_code":"A1", "author":"joe", "ranks":{"rainforest_a":"2", "rainforest_b":"4", "rainforest_a":"2", "rainforest_c":"1", "rainforest_d":"3"}}}
-
-{"eventType":"rankings_submitted", "payload":{"group_code":"A2", "author":"joe", "ranks":{"rainforest_a":"2", "rainforest_b":"4", "rainforest_a":"2", "rainforest_c":"1", "rainforest_d":"3"}}}
-
-{"eventType":"rankings_submitted", "payload":{"group_code":"A3", "author":"joe", "ranks":{"rainforest_a":"2", "rainforest_b":"4", "rainforest_a":"2", "rainforest_c":"1", "rainforest_d":"3"}}}
-
-{"eventType":"rankings_submitted", "payload":{"group_code":"A4", "author":"joe", "ranks":{"rainforest_a":"2", "rainforest_b":"4", "rainforest_a":"2", "rainforest_c":"1", "rainforest_d":"3"}}}
-
----
-{"eventType":"rationale_submitted", "payload":{"group_code":"A1", "author":"jane", "question":"strategy", "answer":"foo"}}

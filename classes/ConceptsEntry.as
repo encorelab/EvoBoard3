@@ -1,7 +1,7 @@
 package classes
 {
-	import flash.display.Sprite;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
 	import flash.text.TextFieldAutoSize;
@@ -25,12 +25,12 @@ package classes
 	
 		private var _hit:MovieClip;
 		
-		public function ConceptsEntry( author_name:String, evo_concept:String, tag_list:Array, explanation_text:String )
+		public function ConceptsEntry( author_name:String, evo_concept:String, time_list:Array, org_list:Array, explanation_text:String )
 		{
 			trace("ConceptsEntry");
 			author = author_name;
 			concept = evo_concept;
-			tags = tag_list;
+			//
 			explanation = explanation_text;
 			expandButton = new ExpandButton();
 			setupExplanation();

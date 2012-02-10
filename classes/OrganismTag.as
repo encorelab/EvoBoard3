@@ -1,6 +1,9 @@
 package classes
 {
 	import flash.display.MovieClip;
+	import flash.filters.BitmapFilter;
+	import flash.filters.BitmapFilterQuality;
+	import flash.filters.GlowFilter;
 	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -18,6 +21,7 @@ package classes
 		private var _boundsRectangle:Rectangle;
 		private var _rainforest:String;
 		private var tagGraphic:OrganismTagGraphic;
+		private var label:MovieClip;
 		private var isStatic:Boolean;
 
 		public function OrganismTag( organism_name:String, assigned_organism:String, author_name:String, location:String, rainforest_loc:String="none" )
@@ -50,13 +54,23 @@ package classes
 			} else {
 				longTFwidth = tagGraphic.author_txt.width
 			}
-			
+			if ( rainforest == "Borneo" ){
+				label = new BorneoTag as MovieClip;
+			} else if ( rainforest == "Sumatra" ){
+				label = new SumatraTag as MovieClip;
+			} else {
+				label = new MovieClip();
+			}
 			tagGraphic.bkgd.width = longTFwidth + 20;
 			tagGraphic.glow.width = longTFwidth + 20;
 			tagGraphic.bkgd.alpha = 0.8;
 			formatPoint();
 			addChild( tagGraphic );
+			addChild( label  );
+			label.x = 4;
+			label.y = 4;
 		}
+		
 		private function resizeTag():void
 		{
 			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 4;
@@ -98,7 +112,20 @@ package classes
 		{
 			connections.push( c );
 		}
-		public function formatColour( new_color:uint=0xFF0000 ):void
+		public function setOutline( colour:uint=0xFF0000 ):void
+		{
+			var thickness = 6;
+			var outline:GlowFilter = new GlowFilter();
+			outline.blurX = outline.blurY = thickness;
+			outline.alpha = 0.8;
+			outline.color = colour;
+			outline.quality = BitmapFilterQuality.HIGH;
+			outline.strength = 20;
+			var filterArray:Array = new Array();
+			filterArray.push(outline);
+			tagGraphic.filters = filterArray;
+		}
+		public function formatColour( new_color:uint=0xFFFFFF ):void
 		{
 			var myColor:ColorTransform = tagGraphic.bkgd.transform.colorTransform;
 			myColor.color = new_color;

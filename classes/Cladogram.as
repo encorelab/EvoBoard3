@@ -40,6 +40,12 @@ package classes
 			addChild( background );
 			setupArrays();
 		}
+		public function addPresentEntry( team_name:String, organisms:Array, rainforest:String ):void
+		{
+			for ( var i:uint = 0; i < organisms.length; i++ ){
+				addEntry( organisms[i], organisms[i], team_name, "present", rainforest );
+			}
+		}
 		public function addEntry( organism_name:String, assigned_organism:String, team_name:String, time_location:String, rain_forest:String="none"):void
 		{
 			trace( "current_set: "+current_set );
@@ -198,7 +204,7 @@ package classes
 		//returns the colour the tag should be based on the teams contributing to the tag
 		private function getColor( team:String, organism_tag=null ):uint
 		{			
-			var colour:uint;
+			var colour:uint = 0xFFFFFF;
 			for( var i:uint = 0; i < current_set.length; i++ ){
 				if ( current_set[i] == team ){
 					if ( !organism_tag ){

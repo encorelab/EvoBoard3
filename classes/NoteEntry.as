@@ -11,19 +11,20 @@ package classes
 	
 	public class NoteEntry extends Sprite
 	{
-		private var author:String;
-		private var specialty:String;
-		private var explanation:String;
-		private var colour:uint;
+		private var _author:String;
+		private var _specialty:String;
+		private var _explanation:String;
+		private var _colour:uint;
 		
-		private var explanationGraphic:ExplanationGraphic;
+		public var noteGraphic:MovieClip;
+		
 		private var explanationObject:Sprite;	
 		private var expandButton:ExpandButton;
 		
 		private var default_TFheight:Number = 93;
-		private var default_TFwidth:Number = 183;
-		private var default_height:Number = 120;
-		private var default_width:Number = 200;
+		public var default_TFwidth:Number = 183;
+		public var default_height:Number = 120;
+		public var default_width:Number = 200;
 		
 		private var _boundsRectangle:Rectangle;
 		private var _hit:MovieClip;
@@ -37,18 +38,18 @@ package classes
 			expandButton = new ExpandButton();
 			setupExplanation();
 		}
-		private function setupExplanation():void
+		public function setupExplanation():void
 		{
-			explanationGraphic = new ExplanationGraphic();
-			addChild( explanationGraphic );
+			noteGraphic = new ExplanationGraphic() as MovieClip;
+			addChild( noteGraphic );
 			
-			hit = explanationGraphic.hit;
+			hit = noteGraphic.hit;
 			hit.addEventListener(MouseEvent.MOUSE_DOWN, handleClick);
 			hit.addEventListener(MouseEvent.MOUSE_UP, handleRelease);
 			
-			explanationGraphic.explanation_txt.multiline = true;			
-			explanationGraphic.explanation_txt.text = explanation;
-			explanationGraphic.author_txt.text = author;
+			noteGraphic.explanation_txt.multiline = true;			
+			noteGraphic.explanation_txt.text = explanation;
+			noteGraphic.author_txt.text = author;
 			
 			trace("explanation.length: "+explanation.length);
 			if ( explanation.length > 200 ){
@@ -58,46 +59,50 @@ package classes
 			}
 			formatColour( colour );
 		}
-		private function resizeExplanation():void
+		public function resizeExplanation():void
 		{
 			trace( "resizeExplanation" );
-			explanationGraphic.explanation_txt.autoSize = TextFieldAutoSize.LEFT;
-			explanationGraphic.explanation_txt.text = explanation;
-			explanationGraphic.explanation_txt.height = explanationGraphic.explanation_txt.textHeight + 8;	
-			explanationGraphic.author_txt.width = explanationGraphic.author_txt.textWidth + 4;
-			explanationGraphic.explanation_txt.width = explanationGraphic.explanation_txt.textWidth + 8;
+			noteGraphic.explanation_txt.autoSize = TextFieldAutoSize.LEFT;
+			noteGraphic.explanation_txt.text = explanation;
+			noteGraphic.explanation_txt.height = noteGraphic.explanation_txt.textHeight + 8;	
+			noteGraphic.author_txt.width = noteGraphic.author_txt.textWidth + 4;
+			noteGraphic.explanation_txt.width = noteGraphic.explanation_txt.textWidth + 8;
 			//trace("explanationGraphic.author_txt.textWidth: "+ explanationGraphic.author_txt.textWidth);
 			//trace("explanationGraphic.explanation_txt.textWidth: "+explanationGraphic.explanation_txt.textWidth);
 			
 			//find out whether organism TF or author TF is wider
 			var longTFwidth:Number;
-			if ( explanationGraphic.explanation_txt.textWidth > explanationGraphic.author_txt.textWidth ){
-				longTFwidth = explanationGraphic.explanation_txt.width   	
+			if ( noteGraphic.explanation_txt.textWidth > noteGraphic.author_txt.textWidth ){
+				longTFwidth = noteGraphic.explanation_txt.width   	
 			} else {
-				longTFwidth = explanationGraphic.author_txt.width
+				longTFwidth = noteGraphic.author_txt.width
 			}
 			
 			//trace("longTFwidth: "+longTFwidth);
-			explanationGraphic.bkgd.width = longTFwidth + 20;
-			explanationGraphic.glow.width = longTFwidth + 20;
-			explanationGraphic.author_txt.y = explanationGraphic.explanation_txt.y + explanationGraphic.explanation_txt.height;
-			explanationGraphic.bkgd.height = explanationGraphic.author_txt.height + explanationGraphic.explanation_txt.height + 16;
-			explanationGraphic.glow.height = explanationGraphic.author_txt.height + explanationGraphic.explanation_txt.height + 16;
+			noteGraphic.bkgd.width = longTFwidth + 20;
+			noteGraphic.glow.width = longTFwidth + 20;
+			noteGraphic.hit.width = longTFwidth + 20;
+			noteGraphic.author_txt.y = noteGraphic.explanation_txt.y + noteGraphic.explanation_txt.height;
+			noteGraphic.bkgd.height = noteGraphic.author_txt.height + noteGraphic.explanation_txt.height + 16;
+			noteGraphic.glow.height = noteGraphic.author_txt.height + noteGraphic.explanation_txt.height + 16;
+			noteGraphic.hit.height = noteGraphic.author_txt.height + noteGraphic.explanation_txt.height + 16;
 			positionExpandButton();
 		}
-		private function resetExplanation():void
+		public function resetExplanation():void
 		{
-			explanationGraphic.explanation_txt.autoSize = TextFieldAutoSize.NONE;
-			explanationGraphic.explanation_txt.height = default_TFheight;
-			explanationGraphic.explanation_txt.width = default_TFwidth;
-			explanationGraphic.bkgd.width = default_width;
-			explanationGraphic.glow.width = default_width;
-			explanationGraphic.bkgd.height = default_height;
-			explanationGraphic.glow.height = default_height;
-			explanationGraphic.author_txt.y = explanationGraphic.explanation_txt.y + explanationGraphic.explanation_txt.height;
+			noteGraphic.explanation_txt.autoSize = TextFieldAutoSize.NONE;
+			noteGraphic.explanation_txt.height = default_TFheight;
+			noteGraphic.explanation_txt.width = default_TFwidth;
+			noteGraphic.bkgd.width = default_width;
+			noteGraphic.glow.width = default_width;
+			noteGraphic.hit.width = default_width;
+			noteGraphic.bkgd.height = default_height;
+			noteGraphic.glow.height = default_height;
+			noteGraphic.hit.height = default_height;
+			noteGraphic.author_txt.y = noteGraphic.explanation_txt.y + noteGraphic.explanation_txt.height;
 			positionExpandButton();
 		}
-		private function setupExpandButton():void
+		public function setupExpandButton():void
 		{
 			trace( "setupExpandButton" );
 			positionExpandButton();
@@ -106,29 +111,29 @@ package classes
 			//setChildIndex( expandButton, numChildren-1 );
 			//trace( "this.numChildren: "+this.numChildren );
 		}
-		private function positionExpandButton():void
+		public function positionExpandButton():void
 		{
-			expandButton.x = explanationGraphic.width - expandButton.width + 4;
-			expandButton.y = explanationGraphic.height - expandButton.height + 1;
+			expandButton.x = noteGraphic.width - expandButton.width + 4;
+			expandButton.y = noteGraphic.height - expandButton.height + 1;
 		}
-		private function formatColour( new_color:uint=0xFF0000 ):void
+		public function formatColour( new_color:uint=0xFF0000 ):void
 		{
-			var myColor:ColorTransform = explanationGraphic.bkgd.transform.colorTransform;
+			var myColor:ColorTransform = noteGraphic.bkgd.transform.colorTransform;
 			myColor.color = new_color;
-			explanationGraphic.bkgd.transform.colorTransform = myColor;
+			noteGraphic.bkgd.transform.colorTransform = myColor;
 		}
 		//GETTERS & SETTERS
 		public function setBoundaries( x_value:Number, y_value:Number, width_value:Number, height_value:Number):void
 		{
-			var adjusted_width:Number = width_value - explanationGraphic.width;
-			var adjusted_height:Number = height_value - explanationGraphic.height;
+			var adjusted_width:Number = width_value - noteGraphic.width;
+			var adjusted_height:Number = height_value - noteGraphic.height;
 			
 			boundsRectangle = new Rectangle( x_value, y_value, adjusted_width, adjusted_height);
 		}
 		public function setPosition( lowX:Number, lowY:Number, highX:Number, highY:Number ):void
 		{
-			var adjusted_highX:Number = highX - explanationGraphic.width;
-			var adjusted_highY:Number = highY - explanationGraphic.height;
+			var adjusted_highX:Number = highX - noteGraphic.width;
+			var adjusted_highY:Number = highY - noteGraphic.height;
 			this.x = Math.floor(Math.random()*( 1 + adjusted_highX - lowX)) + lowX; 
 			this.y = Math.floor(Math.random()*( 1 + adjusted_highY - lowY)) + lowY;
 		}
@@ -144,6 +149,31 @@ package classes
 		public function set hit( value:MovieClip ):void {
 			_hit = value;
 		}
+		public function get author():String {
+			return _author;
+		}
+		public function set author( value:String ):void {
+			_author = value;
+		}
+		public function get specialty():String {
+			return _specialty;
+		}
+		public function set specialty( value:String ):void {
+			_specialty = value;
+		}
+		public function get explanation():String {
+			return _explanation;
+		}
+		public function set explanation( value:String ):void {
+			_explanation = value;
+		}
+		public function get colour():uint {
+			return _colour;
+		}
+		public function set colour( value:uint ):void {
+			_colour = value;
+		}
+		
 		//EVENT HANDLERS
 		private function handleExpandButton( e:CustomEvent ):void
 		{
@@ -158,12 +188,12 @@ package classes
 				resetExplanation();
 			}
 		}
-		private function handleClick( e:MouseEvent ):void
+		public function handleClick( e:MouseEvent ):void
 		{
 			//this.startDrag( false, boundsRectangle );
 			this.startDrag( false );
 		}
-		private function handleRelease( e:MouseEvent ):void
+		public function handleRelease( e:MouseEvent ):void
 		{
 			this.stopDrag();
 		}

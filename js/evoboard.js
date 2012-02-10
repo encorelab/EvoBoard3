@@ -16,6 +16,7 @@ var EvoBoard = {
 	    	organism_observation: passSailEventToFlash,
 	    	note: passSailEventToFlash,
 	    	observation_tabulation: passSailEventToFlash,
+			organism_features: passSailEventToFlash,
 	    	concept_discussion: passSailEventToFlash
         },
         

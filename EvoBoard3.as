@@ -2,18 +2,14 @@ package
 {
 	//This is the evoboard application for step 1 of the evolution run in Feb 2012
 	import classes.Cladogram;
-	import classes.MeetupDisplay;
 	import classes.ConceptsDisplay;
-	//import classes.OrganismTag;
-	//import classes.RankTable;
-	//import classes.RationaleTable;
+	import classes.FeaturesDisplay;
+	import classes.MeetupDisplay;
 	
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
 	import flash.external.ExternalInterface;
 	import flash.text.TextField;
-	
-	//import flare.data.DataSource;
 	
 	public class EvoBoard3 extends Sprite
 	{
@@ -24,13 +20,14 @@ package
 		
 		private var cladogram:Cladogram;
 		private var meetup:MeetupDisplay;		
+		private var features:FeaturesDisplay;
 		private var conceptsDisplay:ConceptsDisplay;
 		
 		private var _currentTeamSet:Array;
 		
 		public static  var stage_width = 1024;
 		public static var stage_height = 768;
-		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0xFFCC66, 0x66FFFF ]; //green, blue, orange, aqua
+		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0xFFCC66, 0x14A99D, 0x8EC447, 0x66FFFF ]; //green, blue, orange, teal, lime, aqua
 		public static var team_set1:Array = ["Darwin", "Linneaus"];
 		public static var team_set2:Array = ["Lamarck", "Wallace"];
 		public static var team_set3:Array = ["Mendel", "Lyell", "Fischer"];
@@ -52,54 +49,61 @@ package
 			meetup = new MeetupDisplay();
 			addChild( meetup );
 			
+			//for Day 2 - STEP1
+			features = new FeaturesDisplay();
+			addChild( features );
+			
 			//for Day 2 - STEP2
 			conceptsDisplay = new ConceptsDisplay();
 			addChild( conceptsDisplay );
 			
 			cladogram.visible = false;
 			meetup.visible = false;
+			features.visible = false;
 			conceptsDisplay.visible = false;
 			
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, reportKeyDown );
 		}		
 		private function reportKeyDown( e:KeyboardEvent ):void
 		{
+			trace( "e.keyCode: "+e.keyCode );
 			if (e.keyCode == 65){ //a
-				//{"eventType":"organism_observation","payload":{"location":"200mya","organism":"monkey","team":"darwin"}}
-				//cladogram.addEntry("old monkey", "proboscis monkey", "Darwin", "200mya");
-				//cladogram.addEntry("old monkey", "proboscis monkey", "Darwin", "50mya");
-				//meetup.addEntry( "Luis", "primates", "Darwin", "foo" );
-				
 				//Day 1 - STEP1
 				setChildIndex( cladogram, numChildren - 1 );
 				cladogram.visible = true;
 				meetup.visible = false;
+				features.visible = false;
 				conceptsDisplay.visible = false;
 			} else if (e.keyCode == 83){ //s
-				//{"eventType":"organism_observation","payload":{"location":"200mya","organism":"monkey","team":"Linneaus"}}
-				//cladogram.addEntry("monkey", "proboscis monkey", "Linneaus", "200mya");
-				//cladogram.addEntry("monkey", "proboscis monkey", "Linneaus", "25mya");
-				//meetup.addEntry( "Amy", "plants_and_insects", "Linneaus", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel aliquam ligula. Maecenas vestibulum laoreet semper. Fusce imperdiet dapibus eros non vulputate. Mauris suscipit, lectus eu imperdiet facilisis, eros eros vehicula ipsum, a tincidunt augue massa a lacus. Aliquam egestas, massa vitae pretium gravida, mauris ligula interdum elit, et aliquet nunc urna vel orci. Aliquam vel libero orci, eu scelerisque augue. Phasellus vel arcu non sapien fringilla consectetur sit amet non est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In molestie tincidunt urna sit amet venenatis. Quisque mollis justo sed nisi bibendum ornare. Fusce diam enim, tincidunt nec dignissim ac, venenatis sed dolor. Morbi lacus ligula, laoreet et commodo eget, tempus id lectus. Nam vestibulum viverra odio, semper aliquet urna venenatis sit amet." );
-				
 				//Day 1 - STEP2
 				setChildIndex( meetup, numChildren - 1 );
 				cladogram.visible = false;
 				meetup.visible = true;
+				features.visible = false;
 				conceptsDisplay.visible = false;				
 			} else if (e.keyCode == 68){ //d
-				//cladogram.addEntry("monkey", "proboscis monkey", "Darwin", "150mya");
-				//cladogram.addEntry("monkey", "proboscis monkey", "Darwin", "5mya");
-				
+				//for Day 2 - STEP1 
+				setChildIndex( conceptsDisplay, numChildren - 1 );
+				cladogram.visible = false;
+				meetup.visible = false;
+				features.visible = true;
+				conceptsDisplay.visible = false;
+			} else if ( e.keyCode == 70){//f
 				//for Day 2 - STEP2
 				setChildIndex( conceptsDisplay, numChildren - 1 );
 				cladogram.visible = false;
 				meetup.visible = false;
+				features.visible = false;
 				conceptsDisplay.visible = true;
-			} else if ( e.keyCode == 70){//f
-				//cladogram.addEntry("monkey", "proboscis monkey", "Darwin", "100mya");
-				//cladogram.addEntry("monkey", "proboscis monkey", "Darwin", "2mya");
-				conceptsDisplay.addEntry( "Jay", "Founder's effect", ["200mya"], "foo" );
+			} else if ( e.keyCode == 81 ){ //q
+				//e.keyCode: 81
+				//e.keyCode: 87
+				//e.keyCode: 69
+				//e.keyCode: 82
+				//features.addEntry("Luis", "Darwin", "Luis", "foo");
+				cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
 			}
+				
 		}
 		//{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}	
 		private function organism_observation( eventData ):void 
@@ -113,18 +117,23 @@ package
 			event_debug.text = eventData.author + " of team " + eventData.team_name + " submitted a note entry for " + eventData.specialty;  
 			meetup.addEntry( eventData.author, eventData.specialty, eventData.team_name, eventData.explanation );
 		}
-		//{"eventType":"organism_observation","payload":{"assigned_organism":"proboscis_monkey","team_name":"Darwin","rainforest":"borneo"}}
+		//{"eventType":"observation_tabulation", "payload":{"team_name":"Luis", "location":"Borneo", "organism_presence":["fig", "civet", "ant" ]}}//
 		private function observation_tabulation( eventData ):void
 		{
-			event_debug.appendText("\n" + eventData.team_name + " identified " + eventData.observed_organism + "'s prescence "+"in "+eventData.rainforest +" as present");
-			cladogram.addEntry( eventData.assigned_organism, eventData.assigned_organism, eventData.team_name, "present", eventData.rainforest );
+			event_debug.appendText("\n" + eventData.team_name + " identified the presence of " + eventData.organism_presence + " in "+eventData.location +" as present");
+			cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
 		}
-		
+		//{"eventType":"note", "payload":{"author":"Luis", "organism":"civet", "team_name":"Darwin", "note":"foo"}}
+		private function organism_features( eventData ):void
+		{
+			event_debug.text = eventData.author + " of team " + eventData.team_name + " submitted a note entry for " + eventData.organism + ": "+eventData.explanation;
+			features.addEntry( eventData.author, eventData.team_name, eventData.organism, eventData.explanation );
+		}
 		private function concept_discussion( eventData ):void
 		{
-			event_debug.text = eventData.author + " submitted a concept entry for " + eventData.concept;
+			event_debug.text = eventData.author + " submitted a concept entry for " + eventData.concept + " at " + eventData.time + " about " + eventData.organism;
 			//author_name:String, evo_concept:String, tag_list:Array, explanation_text:String
-			conceptsDisplay.addEntry( eventData.author, eventData.concept, eventData.tag_list, eventData.explanation );
+			conceptsDisplay.addEntry( eventData.author, eventData.concept, eventData.time, eventData.organism, eventData.explanation );
 		}
 		private function handleSev(eventType, eventData):void 
 		{
@@ -143,6 +152,9 @@ package
 					break;
 				case "observation_tabulation":
 					observation_tabulation(eventData); 
+					break;
+				case "organism_features":
+					organism_features(eventData); 
 					break;
 				case "concept_discussion":
 					concept_discussion(eventData); 
