@@ -61,8 +61,8 @@ package classes
 			} else {
 				label = new MovieClip();
 			}
-			tagGraphic.bkgd.width = longTFwidth + 20;
-			tagGraphic.glow.width = longTFwidth + 20;
+			tagGraphic.bkgd.width = longTFwidth + 10;
+			tagGraphic.glow.width = longTFwidth + 10;
 			tagGraphic.bkgd.alpha = 0.8;
 			formatPoint();
 			addChild( tagGraphic );
@@ -84,8 +84,8 @@ package classes
 				longTFwidth = tagGraphic.author_txt.width
 			}
 			
-			tagGraphic.bkgd.width = longTFwidth + 20;
-			tagGraphic.glow.width = longTFwidth + 20;
+			tagGraphic.bkgd.width = longTFwidth + 10;
+			tagGraphic.glow.width = longTFwidth + 10;
 			formatPoint();
 		}
 		public function addAuthor( new_author:String, colour:uint ):void

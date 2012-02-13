@@ -22,7 +22,7 @@ package classes
 		private var specialtyList:Array = ["birds", "other_mammals", "plants_and_insects", "primates"];
 		private var x_pos:uint = 80;
 		private var row_height = Math.floor( EvoBoard3.stage_height/4 );
-		private var displayArea_width:Number;
+		private var displayArea_width:Number = EvoBoard3.stage_width - 40;
 		
 		public function MeetupDisplay()
 		{

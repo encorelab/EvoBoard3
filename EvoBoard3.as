@@ -101,12 +101,9 @@ package
 				//e.keyCode: 69
 				//e.keyCode: 82
 				//features.addEntry("Luis", "Darwin", "Luis", "foo");
-				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
-				//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
-				//cladogram.addPresentEntry2("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
-				//{"eventType":"note", "payload":{"author":"Luis", "specialty":"primates", "team_name":"Darwin", "note":"foo", "meetup":1}}
-				//{"eventType":"note", "payload":{"author":"Amy", "specialty":"plants_and_insects", "team_name":"Linneaus", "explanation":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel aliquam ligula. Maecenas vestibulum laoreet semper. Fusce imperdiet dapibus eros non vulputate. Mauris suscipit, lectus eu imperdiet facilisis, eros eros vehicula ipsum, a tincidunt augue massa a lacus. Aliquam egestas, massa vitae pretium gravida, mauris ligula interdum elit, et aliquet nunc urna vel orci. Aliquam vel libero orci, eu scelerisque augue. Phasellus vel arcu non sapien fringilla consectetur sit amet non est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In molestie tincidunt urna sit amet venenatis. Quisque mollis justo sed nisi bibendum ornare. Fusce diam enim, tincidunt nec dignissim ac, venenatis sed dolor. Morbi lacus ligula, laoreet et commodo eget, tempus id lectus. Nam vestibulum viverra odio, semper aliquet urna venenatis sit amet.", "meetup":2}}
-				meetup.addEntry( "Luis", "primates", "Linneaus", 1, "foo" );
+				cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
+				cladogram.addPresentEntry2("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
+				//meetup.addEntry( "Luis", "primates", "Linneaus", 1, "foo" );
 				
 			} else if ( e.keyCode == 87 ){
 				meetup.addEntry( "Amy", "plants_and_insects", "Darwin", 2, "poo" );
@@ -123,7 +120,7 @@ package
 		{
 			//meetup":1
 			event_debug.text = eventData.author + " of team " + eventData.team_name + " submitted a note entry for " + eventData.specialty + " during meetup # "+eventData.meetup;  
-			meetup.addEntry( eventData.author, eventData.specialty, eventData.team_name, eventData.meetup, eventData.explanation );
+			meetup.addEntry( eventData.author, eventData.specialty, eventData.team_name, eventData.meetup, eventData.note );
 		}
 		//{"eventType":"observation_tabulation", "payload":{"team_name":"Luis", "location":"Borneo", "organism_presence":["fig", "civet", "ant" ]}}//
 		private function observation_tabulation( eventData ):void

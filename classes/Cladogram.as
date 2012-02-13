@@ -21,12 +21,6 @@ package classes
 		private var x_pos:uint = 80;
 		private var row_height = 86;
 		
-		//green, blue, orange, aqua
-		//private var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0xFFCC66, 0x66FFFF ];		
-		/*private var team_set1:Array = ["Darwin", "Linneaus"];
-		private var team_set2:Array = ["Lamarck", "Wallace"];
-		private var team_set3:Array = ["Mendel", "Lyell", "Fischer"];
-		private var team_set4:Array = ["Buffon", "Malthus", "Huxley"];*/
 		private var team_toc:Array;
 		private var current_set:Array;
 		
