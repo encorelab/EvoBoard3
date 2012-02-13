@@ -25,7 +25,7 @@ package
 		
 		private var _currentTeamSet:Array;
 		
-		public static  var stage_width = 1024;
+		public static var stage_width = 1024;
 		public static var stage_height = 768;
 		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0xFFCC66, 0x14A99D, 0x8EC447, 0x66FFFF ]; //green, blue, orange, teal, lime, aqua
 		public static var team_set1:Array = ["Darwin", "Linneaus"];
@@ -101,9 +101,16 @@ package
 				//e.keyCode: 69
 				//e.keyCode: 82
 				//features.addEntry("Luis", "Darwin", "Luis", "foo");
-				cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
-			}
+				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
+				//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
+				//cladogram.addPresentEntry2("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
+				//{"eventType":"note", "payload":{"author":"Luis", "specialty":"primates", "team_name":"Darwin", "note":"foo", "meetup":1}}
+				//{"eventType":"note", "payload":{"author":"Amy", "specialty":"plants_and_insects", "team_name":"Linneaus", "explanation":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel aliquam ligula. Maecenas vestibulum laoreet semper. Fusce imperdiet dapibus eros non vulputate. Mauris suscipit, lectus eu imperdiet facilisis, eros eros vehicula ipsum, a tincidunt augue massa a lacus. Aliquam egestas, massa vitae pretium gravida, mauris ligula interdum elit, et aliquet nunc urna vel orci. Aliquam vel libero orci, eu scelerisque augue. Phasellus vel arcu non sapien fringilla consectetur sit amet non est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In molestie tincidunt urna sit amet venenatis. Quisque mollis justo sed nisi bibendum ornare. Fusce diam enim, tincidunt nec dignissim ac, venenatis sed dolor. Morbi lacus ligula, laoreet et commodo eget, tempus id lectus. Nam vestibulum viverra odio, semper aliquet urna venenatis sit amet.", "meetup":2}}
+				meetup.addEntry( "Luis", "primates", "Linneaus", 1, "foo" );
 				
+			} else if ( e.keyCode == 87 ){
+				meetup.addEntry( "Amy", "plants_and_insects", "Darwin", 2, "poo" );
+			}
 		}
 		//{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}	
 		private function organism_observation( eventData ):void 
@@ -114,14 +121,17 @@ package
 		//{"eventType":"note", "payload":{"author":"Luis", "specialty":"primates", "team_name":"Darwin", "note":"foo"}}
 		private function note( eventData ):void
 		{
-			event_debug.text = eventData.author + " of team " + eventData.team_name + " submitted a note entry for " + eventData.specialty;  
-			meetup.addEntry( eventData.author, eventData.specialty, eventData.team_name, eventData.explanation );
+			//meetup":1
+			event_debug.text = eventData.author + " of team " + eventData.team_name + " submitted a note entry for " + eventData.specialty + " during meetup # "+eventData.meetup;  
+			meetup.addEntry( eventData.author, eventData.specialty, eventData.team_name, eventData.meetup, eventData.explanation );
 		}
 		//{"eventType":"observation_tabulation", "payload":{"team_name":"Luis", "location":"Borneo", "organism_presence":["fig", "civet", "ant" ]}}//
 		private function observation_tabulation( eventData ):void
 		{
 			event_debug.appendText("\n" + eventData.team_name + " identified the presence of " + eventData.organism_presence + " in "+eventData.location +" as present");
-			cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
+			//cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
+			//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
+			cladogram.addPresentEntry2( eventData.team_name, eventData.organism_presence, eventData.location );
 		}
 		//{"eventType":"note", "payload":{"author":"Luis", "organism":"civet", "team_name":"Darwin", "note":"foo"}}
 		private function organism_features( eventData ):void

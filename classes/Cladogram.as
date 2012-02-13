@@ -46,6 +46,21 @@ package classes
 				addEntry( organisms[i], organisms[i], team_name, "present", rainforest );
 			}
 		}
+		public function addPresentEntry2( team_name:String, organisms:Array, rainforest:String ):void
+		{
+			////{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a",
+			//"organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
+			
+			for( var i:uint = 0; i < organisms.length; i++ ){
+				//trace("organisms["+i+"]: " + organisms[i] );
+				trace("organisms["+i+"].organism: " + organisms[i].organism );
+				trace("organisms["+i+"].is_present: " + organisms[i].is_present );
+				//addEntry( organisms[i], organisms[i], team_name, "present", rainforest );
+				if( organisms[i].is_present == "yes" ){
+					addEntry( organisms[i].organism, organisms[i].organism, team_name, "present", rainforest );
+				}
+			}
+		}
 		public function addEntry( organism_name:String, assigned_organism:String, team_name:String, time_location:String, rain_forest:String="none"):void
 		{
 			trace( "current_set: "+current_set );
@@ -164,14 +179,14 @@ package classes
 			organisms_present = new Array();
 			organisms_toc = new Array();
 			organisms_toc.push({time:"present", list:organisms_present});
-			organisms_toc.push({time:"2mya", list:organisms_2mya});
-			organisms_toc.push({time:"5mya", list:organisms_5mya});
-			organisms_toc.push({time:"10mya", list:organisms_10mya});
-			organisms_toc.push({time:"25mya", list:organisms_25mya});
-			organisms_toc.push({time:"50mya", list:organisms_50mya});
-			organisms_toc.push({time:"100mya", list:organisms_100mya});
-			organisms_toc.push({time:"150mya", list:organisms_150mya});
-			organisms_toc.push({time:"200mya", list:organisms_200mya});
+			organisms_toc.push({time:"2 mya", list:organisms_2mya});
+			organisms_toc.push({time:"5 mya", list:organisms_5mya});
+			organisms_toc.push({time:"10 mya", list:organisms_10mya});
+			organisms_toc.push({time:"25 mya", list:organisms_25mya});
+			organisms_toc.push({time:"50 mya", list:organisms_50mya});
+			organisms_toc.push({time:"100 mya", list:organisms_100mya});
+			organisms_toc.push({time:"150 mya", list:organisms_150mya});
+			organisms_toc.push({time:"200 mya", list:organisms_200mya});
 			team_toc = new Array();
 			team_toc.push(EvoBoard3.team_set1);
 			team_toc.push(EvoBoard3.team_set2);
