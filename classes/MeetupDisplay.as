@@ -18,6 +18,7 @@ package classes
 		private var current_set:Array;
 		private var team_toc:Array;
 		private var sideNav:MovieClip;
+		private var legend:LegendBox;
 
 		private var specialtyList:Array = ["birds", "other_mammals", "plants_and_insects", "primates"];
 		private var x_pos:uint = 80;
@@ -40,7 +41,11 @@ package classes
 		{				
 			trace( "current_set: "+current_set );
 			if ( !current_set ){
-				getCurrentSet( team_name );
+				current_set = getCurrentSet( team_name );
+				legend = new LegendBox( current_set );
+				addChild( legend );
+				legend.x = EvoBoard3.stage_width - legend.width;
+				legend.setMeetupStyle();
 			}
 			var noteEntry:NoteEntry = new NoteEntry( author, specialty, getColor( team_name ), explanation );
 			for ( var i:uint=0; i< specialtyList.length; i++){
@@ -79,16 +84,18 @@ package classes
 			meetup1_notes = new Array();
 			meetup2_notes = new Array();
 		}
-		private function getCurrentSet( team:String ):void
+		private function getCurrentSet( team:String ):Array
 		{
+			var current_list:Array = new Array();
 			for( var i:uint = 0; i < team_toc.length; i++ ){
 				var team_set:Array = team_toc[i];
 				for ( var j:uint = 0; j < team_set.length; j++ ){
 					if ( team == team_set[j] ){
-						current_set = team_set;
+						current_list = team_set;
 					}
 				}
 			}
+			return current_list;
 		}
 		//returns the colour the tag should be based on the teams contributing to the tag
 		private function getColor( team:String ):uint

@@ -6,6 +6,8 @@ package classes
 	public class Cladogram extends Sprite
 	{	
 		private var background:CladogramGraphic;
+		private var legend:LegendBox;
+		
 		private var organisms_200mya:Array;
 		private var organisms_150mya:Array;
 		private var organisms_100mya:Array;
@@ -36,12 +38,6 @@ package classes
 		}
 		public function addPresentEntry( team_name:String, organisms:Array, rainforest:String ):void
 		{
-			for ( var i:uint = 0; i < organisms.length; i++ ){
-				addEntry( organisms[i], organisms[i], team_name, "present", rainforest );
-			}
-		}
-		public function addPresentEntry2( team_name:String, organisms:Array, rainforest:String ):void
-		{
 			////{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a",
 			//"organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
 			
@@ -59,7 +55,10 @@ package classes
 		{
 			trace( "current_set: "+current_set );
 			if ( !current_set ){
-				getCurrentSet( team_name );
+				current_set = getCurrentSet( team_name );
+				legend = new LegendBox( current_set );
+				addChild( legend );
+				legend.x = EvoBoard3.stage_width - legend.width;
 			}
 			var organism_list:Array = getOrgArray( time_location );
 			var tag_present:Boolean = false;
@@ -77,8 +76,10 @@ package classes
 					tag_present = true;
 				}
 			}
-			if ( !tag_present ){
-				addTag( organism_name, assigned_organism, team_name, time_location, rain_forest );
+			if ( !tag_present){
+				if ( organism_name != "none"){
+					addTag( organism_name, assigned_organism, team_name, time_location, rain_forest );
+				}
 			}
 		}
 		private function addTag(organism_name:String, assigned_organism:String, team_name:String, time_location:String, rain_forest:String):void
@@ -188,16 +189,18 @@ package classes
 			team_toc.push(EvoBoard3.team_set4);
 			connections_toc = new Array();
 		}
-		private function getCurrentSet( team:String ):void
+		private function getCurrentSet( team:String ):Array
 		{
+			var current_list:Array = new Array();
 			for( var i:uint = 0; i < team_toc.length; i++ ){
 				var team_set:Array = team_toc[i];
 				for ( var j:uint = 0; j < team_set.length; j++ ){
 					if ( team == team_set[j] ){
-						current_set = team_set;
+						current_list = team_set;
 					}
 				}
 			}
+			return current_list;
 		}
 		//returns the organisms array based on time (e.g. 200mya)
 		private function getOrgArray( time_location:String ):Array
@@ -221,7 +224,7 @@ package classes
 						colour = EvoBoard3.colour_set[i];
 					} else {
 						//combo colour
-						colour = EvoBoard3.colour_set[EvoBoard3.colour_set.length-1];
+						colour = EvoBoard3.colour_set[current_set.length];
 					}
 				}
 			}

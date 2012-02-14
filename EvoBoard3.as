@@ -30,15 +30,15 @@ package
 		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0xFFCC66, 0x14A99D, 0x8EC447, 0x66FFFF ]; //green, blue, orange, teal, lime, aqua
 		public static var team_set1:Array = ["Darwin", "Linneaus"];
 		public static var team_set2:Array = ["Lamarck", "Wallace"];
-		public static var team_set3:Array = ["Mendel", "Lyell", "Fischer"];
-		public static var team_set4:Array = ["Buffon", "Malthus", "Huxley"];
+		public static var team_set3:Array = ["Mendel", "Lyell"]; //"Fischer"
+		public static var team_set4:Array = ["Malthus", "Huxley"]; //"Buffon", 
 		
 		public function EvoBoard3()
 		{
 			event_debug = event_debug_txt;
 			event_debug.text = "Waiting for event...";		
 			version_num = versionNum_txt;
-			version_num.text = "test 04";
+			version_num.text = "v4";
 			ExternalInterface.addCallback("sevToFlash", handleSev);
 						
 			//for Day 1 - STEP1
@@ -101,12 +101,13 @@ package
 				//e.keyCode: 69
 				//e.keyCode: 82
 				//features.addEntry("Luis", "Darwin", "Luis", "foo");
-				cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
-				cladogram.addPresentEntry2("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
+				cladogram.addEntry("pug_the_funny_dog", "dog", "Darwin", "200 mya");
+				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
+				//cladogram.addPresentEntry2("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
 				//meetup.addEntry( "Luis", "primates", "Linneaus", 1, "foo" );
-				
 			} else if ( e.keyCode == 87 ){
-				meetup.addEntry( "Amy", "plants_and_insects", "Darwin", 2, "poo" );
+				cladogram.addEntry("pug_the_hilarious_dog", "dog", "Linneaus", "200 mya");
+				//meetup.addEntry( "Amy", "plants_and_insects", "Darwin", 2, "poo" );
 			}
 		}
 		//{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}	
@@ -126,9 +127,8 @@ package
 		private function observation_tabulation( eventData ):void
 		{
 			event_debug.appendText("\n" + eventData.team_name + " identified the presence of " + eventData.organism_presence + " in "+eventData.location +" as present");
-			//cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
 			//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
-			cladogram.addPresentEntry2( eventData.team_name, eventData.organism_presence, eventData.location );
+			cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
 		}
 		//{"eventType":"note", "payload":{"author":"Luis", "organism":"civet", "team_name":"Darwin", "note":"foo"}}
 		private function organism_features( eventData ):void
@@ -186,6 +186,12 @@ package
 		}
 		public function set currentTeamSet( value:Array ):void {
 			_currentTeamSet = value;
+		}
+		//STATIC FUNCTIONS
+		public static function stripUnderscore( originalstring:String ):String
+		{
+			var original:Array = originalstring.split("_");
+			return(original.join(" "));
 		}
 	}
 }

@@ -8,6 +8,7 @@ package classes
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
 	public class OrganismTag extends MovieClip
 	{
@@ -34,13 +35,20 @@ package classes
 			assignedOrganisms = [assigned_organism];
 			anchorPoint = new Point();
 			connections = new Array();
-			drawTag();			
+			drawTag();
+			
 		}
 		private function drawTag():void
 		{
 			tagGraphic = new OrganismTagGraphic();
-			tagGraphic.organism_txt.text = organismName;
-			tagGraphic.author_txt.text = authorName;
+			tagGraphic.organism_txt.text = EvoBoard3.stripUnderscore( organismName );
+			//change to display assinged organism
+			tagGraphic.author_txt.text = getAssignedOrganisms();
+			
+			var BoldText:TextFormat = new TextFormat();   
+			BoldText.bold=true;
+			tagGraphic.organism_txt.setTextFormat(BoldText);
+			
 			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 4;
 			tagGraphic.author_txt.width = tagGraphic.author_txt.textWidth + 4;
 			
@@ -61,6 +69,7 @@ package classes
 			} else {
 				label = new MovieClip();
 			}
+			
 			tagGraphic.bkgd.width = longTFwidth + 10;
 			tagGraphic.glow.width = longTFwidth + 10;
 			tagGraphic.bkgd.alpha = 0.8;
@@ -92,8 +101,8 @@ package classes
 		{
 			authorName += (", " + new_author );
 			formatColour( colour );
-			tagGraphic.author_txt.text = authorName;
-			resizeTag();
+			//tagGraphic.author_txt.text = authorName;
+			//resizeTag();
 		}
 		public function addAssignedOrg( assigned_org:String ):void
 		{
@@ -106,6 +115,8 @@ package classes
 			if ( !assigned_org_present ){
 				assignedOrganisms.push( assigned_org );
 			}
+			tagGraphic.author_txt.text = getAssignedOrganisms();
+			resizeTag();
 			//trace("assignedOrganisms: "+assignedOrganisms);
 		}
 		public function addConnection( c:Connection ):void
@@ -135,6 +146,14 @@ package classes
 		{
 			anchorPoint.x = tagGraphic.width/2;
 			anchorPoint.y = tagGraphic.height/2;
+		}
+		private function getAssignedOrganisms():String
+		{
+			var assignedOrgs:String = assignedOrganisms[0];
+			for ( var i:uint=0; i < assignedOrganisms.length-1; i++) {
+				assignedOrgs += ", " + assignedOrganisms[i+1];
+			}
+			return assignedOrgs;
 		}
 		public function setBoundaries( x_value:Number, y_value:Number, width_value:Number, height_value:Number):void
 		{
