@@ -27,7 +27,8 @@ package
 		
 		public static var stage_width = 1024;
 		public static var stage_height = 768;
-		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0xFFCC66, 0x14A99D, 0x8EC447, 0x66FFFF ]; //green, blue, orange, teal, lime, aqua
+											//green, blue, aqua, teal, lime, orange
+		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0x66FFFF, 0x14A99D, 0x8EC447, 0xFFCC66 ]; //green, blue, orange, teal, lime, aqua
 		public static var team_set1:Array = ["Darwin", "Linneaus"];
 		public static var team_set2:Array = ["Lamarck", "Wallace"];
 		public static var team_set3:Array = ["Mendel", "Lyell"]; //"Fischer"
