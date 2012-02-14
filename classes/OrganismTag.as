@@ -49,8 +49,8 @@ package classes
 			BoldText.bold=true;
 			tagGraphic.organism_txt.setTextFormat(BoldText);
 			
-			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 4;
-			tagGraphic.author_txt.width = tagGraphic.author_txt.textWidth + 4;
+			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 8;
+			tagGraphic.author_txt.width = tagGraphic.author_txt.textWidth + 8;
 			
 			tagGraphic.organism_txt.mouseEnabled = false;
 			tagGraphic.author_txt.mouseEnabled = false;
@@ -82,8 +82,8 @@ package classes
 		
 		private function resizeTag():void
 		{
-			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 4;
-			tagGraphic.author_txt.width = tagGraphic.author_txt.textWidth + 4;
+			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 8;
+			tagGraphic.author_txt.width = tagGraphic.author_txt.textWidth + 8;
 			
 			//find out whether organism TF or author TF is wider
 			var longTFwidth:Number;

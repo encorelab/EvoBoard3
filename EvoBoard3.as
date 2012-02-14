@@ -101,12 +101,12 @@ package
 				//e.keyCode: 69
 				//e.keyCode: 82
 				//features.addEntry("Luis", "Darwin", "Luis", "foo");
-				cladogram.addEntry("pug_the_funny_dog", "dog", "Darwin", "200 mya");
+				cladogram.addEntry("pug_the_funny_dog", "dog", "Darwin", "25 mya");
 				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
 				//cladogram.addPresentEntry2("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
 				//meetup.addEntry( "Luis", "primates", "Linneaus", 1, "foo" );
 			} else if ( e.keyCode == 87 ){
-				cladogram.addEntry("pug_the_hilarious_dog", "dog", "Linneaus", "200 mya");
+				cladogram.addEntry("pug_the_hilarious_dog", "dog", "Linneaus", "10 mya");
 				//meetup.addEntry( "Amy", "plants_and_insects", "Darwin", 2, "poo" );
 			}
 		}

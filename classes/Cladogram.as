@@ -1,7 +1,9 @@
 package classes
 {
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.geom.ColorTransform;
 	
 	public class Cladogram extends Sprite
 	{	
@@ -19,9 +21,9 @@ package classes
 		private var organisms_present:Array;
 		private var organisms_toc:Array;		
 		
-		private var y_positions:Array = [0, 85, 171, 256, 341, 427, 512, 597, 682, EvoBoard3.stage_height];
+		private var y_positions:Array = [0, 172, 344, 516, 688, 860, 1032, 1204, 1376, 1548];
 		private var x_pos:uint = 80;
-		private var row_height = 86;
+		private var row_height = 172;
 		
 		private var team_toc:Array;
 		private var current_set:Array;
@@ -29,11 +31,38 @@ package classes
 		private var movingTag:OrganismTag;
 		private var connections_toc:Array;
 		
+		private var scrollUpButton:MovieClip;
+		private var scrollDownButton:MovieClip;
+		private var scrollPos:Number;
+		
+		private var tagHolder:Sprite;
+		
 		public function Cladogram()
 		{
 			trace("Cladogram instantiated");
+			tagHolder = new Sprite();
+			addChild( tagHolder );
+			
 			background = new CladogramGraphic();
-			addChild( background );
+			tagHolder.addChild( background );
+			
+			scrollUpButton = new SquareBox() as MovieClip;
+			
+			addChild( scrollUpButton );
+			scrollUpButton.x = EvoBoard3.stage_width - scrollUpButton.width - 10;
+			scrollUpButton.y = 10;
+			scrollUpButton.addEventListener( MouseEvent.CLICK, handleScrollUpButton );
+			formatColour( scrollUpButton, 0x666666 );
+			
+			scrollDownButton = new SquareBox() as MovieClip;
+			addChild( scrollDownButton );
+			scrollDownButton.x = EvoBoard3.stage_width - scrollDownButton.width - 10;
+			scrollDownButton.y = 10 + scrollUpButton.height + 10;
+			scrollDownButton.addEventListener( MouseEvent.CLICK, handleScrollDownButton );
+			formatColour( scrollDownButton, 0x666666 );
+			
+			scrollPos = 2;
+			tagHolder.y = -768;
 			setupArrays();
 		}
 		public function addPresentEntry( team_name:String, organisms:Array, rainforest:String ):void
@@ -59,6 +88,7 @@ package classes
 				legend = new LegendBox( current_set );
 				addChild( legend );
 				legend.x = EvoBoard3.stage_width - legend.width;
+				setChildIndex(legend, 0);
 			}
 			var organism_list:Array = getOrgArray( time_location );
 			var tag_present:Boolean = false;
@@ -86,7 +116,7 @@ package classes
 		{
 			trace("addTag");
 			var orgTag:OrganismTag = new OrganismTag( organism_name, assigned_organism, team_name, time_location, rain_forest );
-			addChild( orgTag );
+			tagHolder.addChild( orgTag );
 			
 			orgTag.addEventListener(MouseEvent.MOUSE_DOWN, handleClick);
 			orgTag.addEventListener(MouseEvent.MOUSE_UP, handleRelease);
@@ -273,6 +303,22 @@ package classes
 				}
 			}
 			e.updateAfterEvent();
+		}
+		private function handleScrollUpButton( e:MouseEvent ):void
+		{
+			trace("move up");
+			tagHolder.y += 50;
+		}
+		private function handleScrollDownButton( e:MouseEvent ):void
+		{
+			trace("move down");
+			tagHolder.y -= 50;
+		}
+		public function formatColour( mc:MovieClip, new_color:uint=0xFFFFFF ):void
+		{
+			var myColor:ColorTransform = mc.transform.colorTransform;
+			myColor.color = new_color;
+			mc.transform.colorTransform = myColor;
 		}
 	}
 }
