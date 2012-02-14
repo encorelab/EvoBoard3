@@ -101,8 +101,8 @@ package classes
 		{
 			authorName += (", " + new_author );
 			formatColour( colour );
-			//tagGraphic.author_txt.text = authorName;
-			//resizeTag();
+			tagGraphic.author_txt.text = authorName;
+			resizeTag();
 		}
 		public function addAssignedOrg( assigned_org:String ):void
 		{
@@ -115,8 +115,8 @@ package classes
 			if ( !assigned_org_present ){
 				assignedOrganisms.push( assigned_org );
 			}
-			tagGraphic.author_txt.text = getAssignedOrganisms();
-			resizeTag();
+			//tagGraphic.author_txt.text = getAssignedOrganisms();
+			//resizeTag();
 			//trace("assignedOrganisms: "+assignedOrganisms);
 		}
 		public function addConnection( c:Connection ):void

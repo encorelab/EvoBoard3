@@ -136,6 +136,7 @@ package classes
 		//finds out if there's a organism tag thats is related across time periods and draws a line between them
 		private function setupConnection( new_ot:OrganismTag, assigned_organism:String, team_name:String, time_location:String ):void
 		{
+			trace("setup connection");
 			for ( var i:uint=0; i< organisms_toc.length; i++){				
 				if ( time_location == organisms_toc[i].time ){
 					//trace("i: "+i);
@@ -157,6 +158,7 @@ package classes
 		}
 		private function drawConnections( existing_orgList:Array, new_ot:OrganismTag, assigned_organism:String, team_name:String ):void
 		{
+			trace("draw connections");
 			for ( var j:uint = 0; j < existing_orgList.length; j++ ){
 				var old_ot:OrganismTag = existing_orgList[j];
 				for ( var k:uint = 0; k < old_ot.assignedOrganisms.length; k++){
@@ -169,7 +171,7 @@ package classes
 								//set up line between the 2 items
 								trace("set up line")							
 								var connection = new Connection( old_ot, new_ot );
-								addChild( connection );
+								tagHolder.addChild( connection );
 								setChildIndex( connection, 0 );
 								old_ot.addConnection( connection );
 								new_ot.addConnection( connection );
