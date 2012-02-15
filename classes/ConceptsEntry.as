@@ -38,6 +38,7 @@ package classes
 			
 			noteGraphic.explanation_txt.multiline = true;			
 			noteGraphic.explanation_txt.text = explanation;
+			noteGraphic.author_txt.autoSize = TextFieldAutoSize.LEFT;
 			noteGraphic.author_txt.text = organismTags.toString() + "," + timeTags.toString();
 			noteGraphic.organism_txt.text = concept;
 			var BoldText:TextFormat = new TextFormat();   
@@ -52,16 +53,17 @@ package classes
 			noteGraphic.organism_txt.width = longTFwidth + 4;
 			noteGraphic.author_txt.width = longTFwidth + 4;
 			
-			if ( (concept_text.length + 6) > tags_text.length || (explain_text.length + 6) > tags_text.length  ){
+			/*if ( (concept_text.length + 6) > tags_text.length || (explain_text.length + 6) > tags_text.length  ){
 				resizeTagHeight();
-			} 
+			}*/ 
+			resizeTagHeight();
 			
-			trace("explanation.length: "+explanation.length);
+			/*trace("explanation.length: "+explanation.length);
 			if ( explanation.length > 200 ){
 				setupExpandButton();
 			} else {
 				resizeExplanation();
-			}
+			}*/
 			formatColour( colour );
 			
 			orgBtn = new SquareBox() as MovieClip;
@@ -82,8 +84,8 @@ package classes
 			}
 			
 			noteGraphic.author_txt.height = noteGraphic.author_txt.textHeight;
-			noteGraphic.bkgd.height = noteGraphic.organism_txt.height + noteGraphic.author_txt.height + 10;
-			noteGraphic.glow.height = noteGraphic.organism_txt.height + noteGraphic.author_txt.height + 10;
+			noteGraphic.bkgd.height = noteGraphic.organism_txt.height + noteGraphic.author_txt.height + noteGraphic.explantion_txt + 10;
+			noteGraphic.glow.height = noteGraphic.organism_txt.height + noteGraphic.author_txt.height + noteGraphic.explantion_txt + 10;
 			
 			trace("tagGraphic.author_txt.textHeight: "+ noteGraphic.author_txt.textHeight);
 			trace("tagGraphic.bkgd.height : "+ noteGraphic.bkgd.height );

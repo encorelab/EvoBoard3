@@ -44,7 +44,7 @@ package
 			event_debug = event_debug_txt;
 			event_debug.text = "Waiting for event...";		
 			version_num = versionNum_txt;
-			version_num.text = "Feb 15, 2012 v5";
+			version_num.text = "Feb 15, 2012 v6";
 			ExternalInterface.addCallback("sevToFlash", handleSev );
 						
 			//for Day 1 - STEP1
