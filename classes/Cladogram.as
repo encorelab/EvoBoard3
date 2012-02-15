@@ -4,6 +4,9 @@ package classes
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
+	import fl.transitions.Tween;
+	import fl.transitions.easing.*;
+	import fl.transitions.TweenEvent;
 	
 	public class Cladogram extends Sprite
 	{	
@@ -19,9 +22,10 @@ package classes
 		private var organisms_present:Array;
 		private var organisms_toc:Array;		
 		
-		private var y_positions:Array = [0, 172, 344, 516, 688, 860, 1032, 1204, 1376, 1548];
+		//private var y_positions:Array = [0, 172, 344, 516, 688, 860, 1032, 1204, 1376, 1548];
 		private var x_pos:uint = 80;
-		private var row_height = 172;
+		//private var row_height = 172;
+		private var row_height = 340;
 		
 		//green, blue, orange, aqua
 		//private var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0xFFCC66, 0x66FFFF ];		
@@ -119,9 +123,9 @@ package classes
 				if ( time_location == organisms_toc[i].time ){
 					organisms_toc[i].list.push( orgTag );
 					//( x_value:Number, y_value:Number, width_value:Number, height_value:Number)
-					orgTag.setBoundaries( 0, y_positions[i], EvoBoard3.stage_width, row_height);
+					orgTag.setBoundaries( 0, row_height*i, EvoBoard3.stage_width, row_height);
 					//( lowX:Number, lowY:Number, highX:Number, highY:Number )
-					orgTag.setPosition( x_pos, y_positions[i], EvoBoard3.stage_width, y_positions[i+1]);
+					orgTag.setPosition( x_pos, row_height*i, EvoBoard3.stage_width, row_height*(i+1));
 				}
 			}
 			orgTag.formatColour( getColor(team_name) );
@@ -298,12 +302,16 @@ package classes
 		}private function handleScrollUpButton( e:MouseEvent ):void
 		{
 			trace("move up");
-			tagHolder.y += 50;
+			var y_constant:Number = 300;
+			var myTween:Tween = new Tween(tagHolder, "y", Strong.easeOut, tagHolder.y, tagHolder.y + y_constant, 1, true );
+			//tagHolder.y += 50;
 		}
 		private function handleScrollDownButton( e:MouseEvent ):void
 		{
 			trace("move down");
-			tagHolder.y -= 50;
+			//tagHolder.y -= 50;
+			var y_constant:Number = 300;
+			var myTween:Tween = new Tween(tagHolder, "y", Strong.easeOut, tagHolder.y, tagHolder.y - y_constant, 1, true );
 		}
 		public function formatColour( mc:MovieClip, new_color:uint=0xFFFFFF ):void
 		{

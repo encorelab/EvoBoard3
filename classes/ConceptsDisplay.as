@@ -43,7 +43,7 @@ package classes
 			addChild( timeHolder );
 			
 			tagHolder = new Sprite();
-			tagHolder.x = EvoBoard3.stage_width - 170 + 10;
+			tagHolder.x = EvoBoard3.stage_width - 160 + 10;
 			tagHolder.y = top_margin;
 			addChild( tagHolder );
 			

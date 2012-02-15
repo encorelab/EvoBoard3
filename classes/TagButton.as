@@ -22,14 +22,14 @@ package classes
 			tagTF.multiline = false;
 			tagTF.wordWrap = false;
 			tagTF.text = label;
-			
+			tagBtn.alpha = 0.5;
 			trace("tagTF.textWidth: "+tagTF.textWidth);
 			trace("tagTF.width: "+tagTF.width);
 			
-			if ( tagTF.textWidth > tagTF.width ){	
-				tagTF.width = tagTF.textWidth + 10;
-				tagBtn.width = tagTF.textWidth + 10;
-			}
+				
+			//tagTF.width = tagTF.textWidth + 10;
+			tagBtn.width = tagTF.width;
+			
 			tagBtn.buttonMode = true;
 			tagBtn.addEventListener( MouseEvent.CLICK, handleClick );
 		}
