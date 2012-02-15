@@ -44,6 +44,18 @@ package classes
 			BoldText.bold=true;
 			noteGraphic.organism_txt.setTextFormat(BoldText);
 			
+			//find out whether organism TF or author TF is wider
+			var longTFwidth:Number;			
+			var tags_text:String = organismTags.toString() + "," + timeTags.toString();
+			var concept_text:String = concept;
+			var explain_text:String = explanation;
+			noteGraphic.organism_txt.width = longTFwidth + 4;
+			noteGraphic.author_txt.width = longTFwidth + 4;
+			
+			if ( (concept_text.length + 6) > tags_text.length || (explain_text.length + 6) > tags_text.length  ){
+				resizeTagHeight();
+			} 
+			
 			trace("explanation.length: "+explanation.length);
 			if ( explanation.length > 200 ){
 				setupExpandButton();
@@ -60,6 +72,21 @@ package classes
 			orgBtn.height = noteGraphic.organism_txt.height;
 			orgBtn.alpha = 0;
 			orgBtn.addEventListener( MouseEvent.CLICK, handleOrgBtnClick );
+		}
+		private function resizeTagHeight():void
+		{
+			trace("resizeTagHeight");
+			var maxLines = 3;
+			while( noteGraphic.author_txt.numLines > maxLines){
+				noteGraphic.author_txt.width +=1;
+			}
+			
+			noteGraphic.author_txt.height = noteGraphic.author_txt.textHeight;
+			noteGraphic.bkgd.height = noteGraphic.organism_txt.height + noteGraphic.author_txt.height + 10;
+			noteGraphic.glow.height = noteGraphic.organism_txt.height + noteGraphic.author_txt.height + 10;
+			
+			trace("tagGraphic.author_txt.textHeight: "+ noteGraphic.author_txt.textHeight);
+			trace("tagGraphic.bkgd.height : "+ noteGraphic.bkgd.height );
 		}
 		public function tagMatch( item:String ):Boolean
 		{

@@ -35,7 +35,7 @@ package
 		public static var team_set2:Array = ["Lamarck", "Wallace"];
 		public static var team_set3:Array = ["Mendel", "Lyell", "Fischer"];
 		public static var team_set4:Array = ["Buffon", "Malthus", "Huxley"];
-		public static var concept_list:Array = ["Adaption","Bottleneck","Coevolution","Founder effect","Gene flow","Natural selection","Reproductive isolation","Sexual selection","Other"];
+		public static var concept_list:Array = ["adaptation","bottleneck","coevolution","founder effect","gene flow","natural selection","reproductive isolation","sexual selection","other"];
 		public static var borneoID:String = "Borneo";
 		public static var sumatraID:String = "Sumatra";
 		
@@ -44,7 +44,7 @@ package
 			event_debug = event_debug_txt;
 			event_debug.text = "Waiting for event...";		
 			version_num = versionNum_txt;
-			version_num.text = "Feb 15, 2012 v2";
+			version_num.text = "Feb 15, 2012 v4";
 			ExternalInterface.addCallback("sevToFlash", handleSev );
 						
 			//for Day 1 - STEP1

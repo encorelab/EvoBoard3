@@ -17,6 +17,11 @@ package classes
 			
 			tagTF = this.tag_txt;
 			tagBtn = this.tag_btn;
+			if ( label == "present day Borneo"){
+				label = "borneo";
+			} else if ( label == "Sumatra"){
+				label = "sumatra";
+			}
 			tagLabel = label;
 			tagTF.autoSize = TextFieldAutoSize.LEFT;
 			tagTF.multiline = false;
