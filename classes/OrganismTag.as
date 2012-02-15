@@ -70,9 +70,9 @@ package classes
 			tagGraphic.bkgd.alpha = 0.8;
 			formatPoint();
 					
-			if ( rainforest == "Borneo" ){
+			if ( rainforest == EvoBoard3.borneoID ){
 				label = new BorneoTag as MovieClip;
-			} else if ( rainforest == "Sumatra" ){
+			} else if ( rainforest == EvoBoard3.sumatraID ){
 				label = new SumatraTag as MovieClip;
 			} else {
 				label = new MovieClip();

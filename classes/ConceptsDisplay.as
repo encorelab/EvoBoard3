@@ -17,7 +17,7 @@ package classes
 		private var tagHolder:Sprite;
 		private var timeHolder:Sprite;
 		private var tagsTF:TextField;		
-		private var nav_width:uint = 150;
+		private var nav_width:uint = 230;
 		private var top_margin:uint = 50;
 		
 		private var organismTags:Array;
@@ -43,7 +43,7 @@ package classes
 			addChild( timeHolder );
 			
 			tagHolder = new Sprite();
-			tagHolder.x = EvoBoard3.stage_width - 80 + 10;
+			tagHolder.x = EvoBoard3.stage_width - 170 + 10;
 			tagHolder.y = top_margin;
 			addChild( tagHolder );
 			
@@ -53,7 +53,6 @@ package classes
 			resetButton.y = 10;
 			resetButton.alpha = 0.2;
 			resetButton.addEventListener( MouseEvent.CLICK, handleResetButton );
-			
 		}
 		public function addEntry( author:String, evo_concept:String, time_list:Array, org_list:Array, explanation:String ):void
 		{	
@@ -128,6 +127,7 @@ package classes
 			sideBkgd.alpha = 0.5;
 			sideBkgd.x = EvoBoard3.stage_width - sideBkgd.width;
 		}
+		
 		private function handleConceptClick( e:CustomEvent ):void
 		{
 			trace( "organism click: "+ e.customObject );

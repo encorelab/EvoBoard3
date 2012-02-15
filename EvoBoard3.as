@@ -36,13 +36,15 @@ package
 		public static var team_set3:Array = ["Mendel", "Lyell", "Fischer"];
 		public static var team_set4:Array = ["Buffon", "Malthus", "Huxley"];
 		public static var concept_list:Array = ["Adaption","Bottleneck","Coevolution","Founder effect","Gene flow","Natural selection","Reproductive isolation","Sexual selection","Other"];
+		public static var borneoID:String = "Borneo";
+		public static var sumatraID:String = "Sumatra";
 		
 		public function EvoBoard3()
 		{
 			event_debug = event_debug_txt;
 			event_debug.text = "Waiting for event...";		
 			version_num = versionNum_txt;
-			version_num.text = "Feb 14, 2012 v4";
+			version_num.text = "Feb 15, 2012 v2";
 			ExternalInterface.addCallback("sevToFlash", handleSev );
 						
 			//for Day 1 - STEP1
@@ -104,7 +106,7 @@ package
 				//e.keyCode: 87
 				//e.keyCode: 69
 				//e.keyCode: 82
-				conceptsDisplay.addEntry( "Luis", "Natural selection", ["200 mya", "150 mya"], ["fig wasp", "fig tree"], "foo" );
+				conceptsDisplay.addEntry( "Luis", "Natural selection", ["200 mya", "150 mya"], ["sumatran_striped_rabbit", "fig tree"], "foo" );
 				//features.addEntry("Luis", "Darwin", "primates", "foo");
 				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
 				//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
@@ -131,7 +133,7 @@ package
 		//{"eventType":"observation_tabulation", "payload":{"team_name":"Luis", "location":"Borneo", "organism_presence":["fig", "civet", "ant" ]}}//
 		private function observation_tabulation( eventData ):void
 		{
-			event_debug.appendText("\n" + eventData.team_name + " identified the presence of " + eventData.organism_presence + " in "+eventData.location +" as present");
+			event_debug.appendText("\n" + eventData.team_name + " identified the presence of " + eventData.organism_presence + " in "+eventData.island +" as present");
 			//cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
 			//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
 			cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
