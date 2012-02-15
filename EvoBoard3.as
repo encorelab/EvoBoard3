@@ -44,7 +44,7 @@ package
 			event_debug = event_debug_txt;
 			event_debug.text = "Waiting for event...";		
 			version_num = versionNum_txt;
-			version_num.text = "Feb 15, 2012 v4";
+			version_num.text = "Feb 15, 2012 v5";
 			ExternalInterface.addCallback("sevToFlash", handleSev );
 						
 			//for Day 1 - STEP1
@@ -106,7 +106,8 @@ package
 				//e.keyCode: 87
 				//e.keyCode: 69
 				//e.keyCode: 82
-				conceptsDisplay.addEntry( "Luis", "Natural selection", ["200 mya", "150 mya"], ["sumatran_striped_rabbit", "fig tree"], "foo" );
+				conceptsDisplay.addEntry( "Luis", "Natural selection", ["200 mya", "150 mya"], ["sumatran_striped_rabbit", "fig tree", "sumatran_striped_rabbit", "fig tree", "sumatran_striped_rabbit", "fig tree", "sumatran_striped_rabbit", "fig tree", "sumatran_striped_rabbit", "fig tree"], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac tempus ante. Fusce congue viverra nisi, fringilla hendrerit magna semper at. Nullam massa tortor, tempus non mattis ut, varius ut massa. Aliquam posuere eros in turpis pulvinar ac molestie mauris commodo. Ut sem sapien, mollis in blandit elementum, bibendum vitae est. Curabitur lacus velit, blandit sit amet accumsan id, posuere rhoncus ligula. Nam et rhoncus lectus. Curabitur et ipsum non sapien luctus accumsan non a eros. Nulla non nisl ipsum. Etiam in neque non nibh bibendum tincidunt.");
+
 				//features.addEntry("Luis", "Darwin", "primates", "foo");
 				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
 				//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
