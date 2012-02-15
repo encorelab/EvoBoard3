@@ -4,49 +4,45 @@ package classes
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
+	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
 	
-	public class ConceptsEntry extends Sprite
+	public class ConceptsEntry extends FeaturesEntry
 	{
-		private var author:String;
-		private var tags:Array;
-		private var explanation:String;
-		private var concept:String;
-		private var colour:uint;
-		
-		private var explanationGraphic:ExplanationGraphic;
-		private var explanationObject:Sprite;	
-		private var expandButton:ExpandButton;
-		
-		private var default_TFheight:Number = 93;
-		private var default_TFwidth:Number = 183;
-		private var default_height:Number = 120;
-		private var default_width:Number = 200;
-	
+		private var _concept:String;
 		private var _hit:MovieClip;
 		
-		public function ConceptsEntry( author_name:String, evo_concept:String, time_list:Array, org_list:Array, explanation_text:String )
+		private var organismTags:Array;
+		private var timeTags:Array;
+		private var orgTF:TextField;
+		private var orgBtn:MovieClip;
+		
+		private var default_TFheight:Number = 75;
+		
+		public function ConceptsEntry( author_name:String, evo_concept:String, colour:uint, time_list:Array, org_list:Array, explanation_text:String )
 		{
-			trace("ConceptsEntry");
-			author = author_name;
 			concept = evo_concept;
-			//
-			explanation = explanation_text;
-			expandButton = new ExpandButton();
-			setupExplanation();
+			organismTags = org_list;
+			timeTags = time_list;
+			super(author_name, evo_concept, colour, explanation_text);
 		}
-		private function setupExplanation():void
+		public override function setupExplanation():void
 		{
-			explanationGraphic = new ExplanationGraphic();
-			addChild( explanationGraphic );
+			noteGraphic = new FeaturesNoteGraphic() as MovieClip;
+			addChild( noteGraphic );
 			
-			hit = explanationGraphic.hit;
+			hit = noteGraphic.hit;
 			hit.addEventListener(MouseEvent.MOUSE_DOWN, handleClick);
 			hit.addEventListener(MouseEvent.MOUSE_UP, handleRelease);
 			
-			explanationGraphic.explanation_txt.multiline = true;			
-			explanationGraphic.explanation_txt.text = explanation;
-			explanationGraphic.author_txt.text = author;
+			noteGraphic.explanation_txt.multiline = true;			
+			noteGraphic.explanation_txt.text = explanation;
+			noteGraphic.author_txt.text = organismTags.toString() + "," + timeTags.toString();
+			noteGraphic.organism_txt.text = concept;
+			var BoldText:TextFormat = new TextFormat();   
+			BoldText.bold=true;
+			noteGraphic.organism_txt.setTextFormat(BoldText);
 			
 			trace("explanation.length: "+explanation.length);
 			if ( explanation.length > 200 ){
@@ -54,100 +50,33 @@ package classes
 			} else {
 				resizeExplanation();
 			}
-			formatColour();
-			setPosition();
+			formatColour( colour );
+			
+			orgBtn = new SquareBox() as MovieClip;
+			addChild( orgBtn );
+			orgBtn.x = noteGraphic.organism_txt.x;
+			orgBtn.y = noteGraphic.organism_txt.y;
+			orgBtn.width = noteGraphic.organism_txt.width;
+			orgBtn.height = noteGraphic.organism_txt.height;
+			orgBtn.alpha = 0;
+			orgBtn.addEventListener( MouseEvent.CLICK, handleOrgBtnClick );
 		}
-		private function resizeExplanation():void
+		public function tagMatch( item:String ):Boolean
 		{
-			trace( "resizeExplanation" );
-			explanationGraphic.explanation_txt.autoSize = TextFieldAutoSize.LEFT;
-			explanationGraphic.explanation_txt.text = explanation;
-			explanationGraphic.explanation_txt.height = explanationGraphic.explanation_txt.textHeight + 8;	
-			explanationGraphic.author_txt.width = explanationGraphic.author_txt.textWidth + 4;
-			explanationGraphic.explanation_txt.width = explanationGraphic.explanation_txt.textWidth + 8;
-			var longTFwidth:Number;
-			if ( explanationGraphic.explanation_txt.textWidth > explanationGraphic.author_txt.textWidth ){
-				longTFwidth = explanationGraphic.explanation_txt.width   	
-			} else {
-				longTFwidth = explanationGraphic.author_txt.width
+			var match:Boolean = false;
+			var allTags:Array = timeTags.concat( organismTags );
+			for ( var i:uint = 0; i < allTags.length; i++ ){
+				if ( item == allTags[i] ){
+					match = true;
+				}
 			}
-			explanationGraphic.bkgd.width = longTFwidth + 20;
-			explanationGraphic.glow.width = longTFwidth + 20;
-			explanationGraphic.author_txt.y = explanationGraphic.explanation_txt.y + explanationGraphic.explanation_txt.height;
-			explanationGraphic.bkgd.height = explanationGraphic.author_txt.height + explanationGraphic.explanation_txt.height + 16;
-			explanationGraphic.glow.height = explanationGraphic.author_txt.height + explanationGraphic.explanation_txt.height + 16;
-			positionExpandButton();
+			return match;
 		}
-		private function resetExplanation():void
-		{
-			explanationGraphic.explanation_txt.autoSize = TextFieldAutoSize.NONE;
-			explanationGraphic.explanation_txt.height = default_TFheight;
-			explanationGraphic.explanation_txt.width = default_TFwidth;
-			explanationGraphic.bkgd.width = default_width;
-			explanationGraphic.glow.width = default_width;
-			explanationGraphic.bkgd.height = default_height;
-			explanationGraphic.glow.height = default_height;
-			explanationGraphic.author_txt.y = explanationGraphic.explanation_txt.y + explanationGraphic.explanation_txt.height;
-			positionExpandButton();
+		public function get concept():String {
+			return _concept;
 		}
-		private function setupExpandButton():void
-		{
-			trace( "setupExpandButton" );
-			positionExpandButton();
-			expandButton.addEventListener( CustomEvent.EXPAND, handleExpandButton );
-			addChild( expandButton );
-		}
-		private function positionExpandButton():void
-		{
-			expandButton.x = explanationGraphic.width - expandButton.width + 4;
-			expandButton.y = explanationGraphic.height - expandButton.height + 1;
-		}
-		private function formatColour( new_color:uint=0xFFFFFF ):void
-		{
-			var myColor:ColorTransform = explanationGraphic.bkgd.transform.colorTransform;
-			myColor.color = new_color;
-			explanationGraphic.bkgd.transform.colorTransform = myColor;
-		}
-		//GETTERS & SETTERS
-		//randomize
-		public function setPosition():void
-		{
-			var lowX:Number = 0
-			var lowY:Number = 0
-			var highX:Number = EvoBoard3.stage_width;
-			var highY:Number = EvoBoard3.stage_height;
-			var adjusted_highX:Number = highX - explanationGraphic.width;
-			var adjusted_highY:Number = highY - explanationGraphic.height;
-			this.x = Math.floor(Math.random()*( 1 + adjusted_highX - lowX)) + lowX; 
-			this.y = Math.floor(Math.random()*( 1 + adjusted_highY - lowY)) + lowY;
-		}
-		public function get hit():MovieClip {
-			return _hit;
-		}
-		public function set hit( value:MovieClip ):void {
-			_hit = value;
-		}
-		
-		//EVENT HANDLERS
-		private function handleExpandButton( e:CustomEvent ):void
-		{
-			trace("expanded: "+expanded);
-			var expanded = e.customObject as Boolean;
-			if( expanded ){
-				//expand
-				resizeExplanation();
-			} else {
-				//shrink
-				resetExplanation();
-			}
-		}
-		private function handleClick( e:MouseEvent ):void
-		{
-			this.startDrag( false );
-		}
-		private function handleRelease( e:MouseEvent ):void
-		{
-			this.stopDrag();
+		public function set concept( value:String ):void {
+			_concept = value;
 		}
 	}
 }

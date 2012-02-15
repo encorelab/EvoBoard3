@@ -8,8 +8,6 @@ package classes
 	public class Cladogram extends Sprite
 	{	
 		private var background:CladogramGraphic;
-		private var legend:LegendBox;
-		
 		private var organisms_200mya:Array;
 		private var organisms_150mya:Array;
 		private var organisms_100mya:Array;
@@ -25,57 +23,55 @@ package classes
 		private var x_pos:uint = 80;
 		private var row_height = 172;
 		
+		//green, blue, orange, aqua
+		//private var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0xFFCC66, 0x66FFFF ];		
+		/*private var team_set1:Array = ["Darwin", "Linneaus"];
+		private var team_set2:Array = ["Lamarck", "Wallace"];
+		private var team_set3:Array = ["Mendel", "Lyell", "Fischer"];
+		private var team_set4:Array = ["Buffon", "Malthus", "Huxley"];*/
 		private var team_toc:Array;
 		private var current_set:Array;
 		
 		private var movingTag:OrganismTag;
 		private var connections_toc:Array;
 		
+		private var legend:LegendBox;
 		private var scrollUpButton:MovieClip;
 		private var scrollDownButton:MovieClip;
-		private var scrollPos:Number;
 		
 		private var tagHolder:Sprite;
 		
 		public function Cladogram()
 		{
 			trace("Cladogram instantiated");
+			setupArrays();
+			
 			tagHolder = new Sprite();
 			addChild( tagHolder );
 			
 			background = new CladogramGraphic();
 			tagHolder.addChild( background );
 			
-			scrollUpButton = new SquareBox() as MovieClip;
-			
+			scrollUpButton = new SquareBox() as MovieClip;			
 			addChild( scrollUpButton );
 			scrollUpButton.x = EvoBoard3.stage_width - scrollUpButton.width - 10;
 			scrollUpButton.y = 10;
+			scrollUpButton.alpha = 0.2;
 			scrollUpButton.addEventListener( MouseEvent.CLICK, handleScrollUpButton );
-			formatColour( scrollUpButton, 0x666666 );
+			//formatColour( scrollUpButton, 0x000000 );
 			
 			scrollDownButton = new SquareBox() as MovieClip;
 			addChild( scrollDownButton );
 			scrollDownButton.x = EvoBoard3.stage_width - scrollDownButton.width - 10;
 			scrollDownButton.y = 10 + scrollUpButton.height + 10;
+			scrollDownButton.alpha = 0.2;
 			scrollDownButton.addEventListener( MouseEvent.CLICK, handleScrollDownButton );
-			formatColour( scrollDownButton, 0x666666 );
-			
-			scrollPos = 2;
-			tagHolder.y = -768;
-			setupArrays();
+			//formatColour( scrollDownButton, 0x000000 );
 		}
 		public function addPresentEntry( team_name:String, organisms:Array, rainforest:String ):void
 		{
-			////{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a",
-			//"organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
-			
 			for( var i:uint = 0; i < organisms.length; i++ ){
-				//trace("organisms["+i+"]: " + organisms[i] );
-				trace("organisms["+i+"].organism: " + organisms[i].organism );
-				trace("organisms["+i+"].is_present: " + organisms[i].is_present );
-				//addEntry( organisms[i], organisms[i], team_name, "present", rainforest );
-				if( organisms[i].is_present == "yes" ){
+				if( organisms[i].is_present == "yes"){					
 					addEntry( organisms[i].organism, organisms[i].organism, team_name, "present", rainforest );
 				}
 			}
@@ -84,8 +80,8 @@ package classes
 		{
 			trace( "current_set: "+current_set );
 			if ( !current_set ){
-				current_set = getCurrentSet( team_name );
-				legend = new LegendBox( current_set );
+				getCurrentSet( team_name );
+				legend = new LegendBox( current_set, true );
 				addChild( legend );
 				legend.x = EvoBoard3.stage_width - legend.width;
 				setChildIndex(legend, 0);
@@ -97,7 +93,7 @@ package classes
 				if ( organism_name == organism_list[i].organismName ){
 					//tag present already, find out team combo, change colour
 					//if team name is the same then don't change, if team name is different then change
-					trace(organism_list[i].authorName.indexOf(team_name));
+					//trace( organism_list[i].authorName.indexOf(team_name) );
 					if ( organism_list[i].authorName.indexOf(team_name) == -1){  
 						organism_list[i].addAuthor( team_name, getColor( team_name, organism_list[i]) );
 					}
@@ -106,10 +102,8 @@ package classes
 					tag_present = true;
 				}
 			}
-			if ( !tag_present){
-				if ( organism_name != "none"){
-					addTag( organism_name, assigned_organism, team_name, time_location, rain_forest );
-				}
+			if ( !tag_present && organism_name != "none"){
+				addTag( organism_name, assigned_organism, team_name, time_location, rain_forest );
 			}
 		}
 		private function addTag(organism_name:String, assigned_organism:String, team_name:String, time_location:String, rain_forest:String):void
@@ -136,7 +130,6 @@ package classes
 		//finds out if there's a organism tag thats is related across time periods and draws a line between them
 		private function setupConnection( new_ot:OrganismTag, assigned_organism:String, team_name:String, time_location:String ):void
 		{
-			trace("setup connection");
 			for ( var i:uint=0; i< organisms_toc.length; i++){				
 				if ( time_location == organisms_toc[i].time ){
 					//trace("i: "+i);
@@ -158,7 +151,6 @@ package classes
 		}
 		private function drawConnections( existing_orgList:Array, new_ot:OrganismTag, assigned_organism:String, team_name:String ):void
 		{
-			trace("draw connections");
 			for ( var j:uint = 0; j < existing_orgList.length; j++ ){
 				var old_ot:OrganismTag = existing_orgList[j];
 				for ( var k:uint = 0; k < old_ot.assignedOrganisms.length; k++){
@@ -172,7 +164,7 @@ package classes
 								trace("set up line")							
 								var connection = new Connection( old_ot, new_ot );
 								tagHolder.addChild( connection );
-								setChildIndex( connection, 0 );
+								tagHolder.setChildIndex( connection, 0 );
 								old_ot.addConnection( connection );
 								new_ot.addConnection( connection );
 								connections_toc.push( connection );
@@ -221,18 +213,16 @@ package classes
 			team_toc.push(EvoBoard3.team_set4);
 			connections_toc = new Array();
 		}
-		private function getCurrentSet( team:String ):Array
+		private function getCurrentSet( team:String ):void
 		{
-			var current_list:Array = new Array();
 			for( var i:uint = 0; i < team_toc.length; i++ ){
 				var team_set:Array = team_toc[i];
 				for ( var j:uint = 0; j < team_set.length; j++ ){
 					if ( team == team_set[j] ){
-						current_list = team_set;
+						current_set = team_set;
 					}
 				}
 			}
-			return current_list;
 		}
 		//returns the organisms array based on time (e.g. 200mya)
 		private function getOrgArray( time_location:String ):Array
@@ -305,8 +295,7 @@ package classes
 				}
 			}
 			e.updateAfterEvent();
-		}
-		private function handleScrollUpButton( e:MouseEvent ):void
+		}private function handleScrollUpButton( e:MouseEvent ):void
 		{
 			trace("move up");
 			tagHolder.y += 50;

@@ -6,9 +6,11 @@ package
 	import classes.FeaturesDisplay;
 	import classes.MeetupDisplay;
 	
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
 	import flash.external.ExternalInterface;
+	import flash.geom.ColorTransform;
 	import flash.text.TextField;
 	
 	public class EvoBoard3 extends Sprite
@@ -25,22 +27,23 @@ package
 		
 		private var _currentTeamSet:Array;
 		
-		public static var stage_width = 1024;
+		public static  var stage_width = 1024;
 		public static var stage_height = 768;
-											//green, blue, aqua, teal, lime, orange
-		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0x66FFFF, 0x14A99D, 0x8EC447, 0xFFCC66 ]; //green, blue, orange, teal, lime, aqua
+		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0x66FFFF, 0x14A99D, 0x8EC447, 0xFFCC66 ]; //green, blue, aqua, teal, lime, orange
+		public static var concept_colours:Array = [ 0xF0B623, 0xFA9643, 0x14A99D, 0x8EC447, 0xFE9897, 0x00CCFF, 0xCCFFCC, 0x9ADD8D, 0x007EDD ]; //green, blue, aqua, teal, lime, orange
 		public static var team_set1:Array = ["Darwin", "Linneaus"];
 		public static var team_set2:Array = ["Lamarck", "Wallace"];
-		public static var team_set3:Array = ["Mendel", "Lyell"]; //"Fischer"
-		public static var team_set4:Array = ["Malthus", "Huxley"]; //"Buffon", 
+		public static var team_set3:Array = ["Mendel", "Lyell", "Fischer"];
+		public static var team_set4:Array = ["Buffon", "Malthus", "Huxley"];
+		public static var concept_list:Array = ["Adaption","Bottleneck","Coevolution","Founder effect","Gene flow","Natural selection","Reproductive isolation","Sexual selection","Other"];
 		
 		public function EvoBoard3()
 		{
 			event_debug = event_debug_txt;
 			event_debug.text = "Waiting for event...";		
 			version_num = versionNum_txt;
-			version_num.text = "Feb 14, 2012 v.2";
-			ExternalInterface.addCallback("sevToFlash", handleSev);
+			version_num.text = "Feb 14, 2012 v4";
+			ExternalInterface.addCallback("sevToFlash", handleSev );
 						
 			//for Day 1 - STEP1
 			cladogram = new Cladogram();
@@ -67,7 +70,7 @@ package
 		}		
 		private function reportKeyDown( e:KeyboardEvent ):void
 		{
-			trace( "e.keyCode: "+e.keyCode );
+			//trace( "e.keyCode: "+e.keyCode );
 			if (e.keyCode == 65){ //a
 				//Day 1 - STEP1
 				setChildIndex( cladogram, numChildren - 1 );
@@ -97,18 +100,19 @@ package
 				features.visible = false;
 				conceptsDisplay.visible = true;
 			} else if ( e.keyCode == 81 ){ //q
-				//e.keyCode: 81
+				//e.keyCode: 81				
 				//e.keyCode: 87
 				//e.keyCode: 69
 				//e.keyCode: 82
-				//features.addEntry("Luis", "Darwin", "Luis", "foo");
-				cladogram.addEntry("pug_the_funny_dog", "dog", "Darwin", "200 mya");
+				conceptsDisplay.addEntry( "Luis", "Natural selection", ["200 mya", "150 mya"], ["fig wasp", "fig tree"], "foo" );
+				//features.addEntry("Luis", "Darwin", "primates", "foo");
 				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
-				//cladogram.addPresentEntry2("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
-				//meetup.addEntry( "Luis", "primates", "Linneaus", 1, "foo" );
+				//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
+				//cladogram.addPresentEntry("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
 			} else if ( e.keyCode == 87 ){
-				cladogram.addEntry("pug_the_hilarious_dog", "dog", "Linneaus", "150 mya");
-				//meetup.addEntry( "Amy", "plants_and_insects", "Darwin", 2, "poo" );
+				conceptsDisplay.addEntry( "Amy", "Sexual selection", ["50 mya", "10 mya"], ["monkey", "fig tree"], "foo" )
+				//cladogram.addEntry("proboscis_monkey", "proboscis_monkey", "Darwin", "2 mya");
+				//features.addEntry("Luis", "Darwin", "primates", "foo");
 			}
 		}
 		//{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}	
@@ -122,12 +126,13 @@ package
 		{
 			//meetup":1
 			event_debug.text = eventData.author + " of team " + eventData.team_name + " submitted a note entry for " + eventData.specialty + " during meetup # "+eventData.meetup;  
-			meetup.addEntry( eventData.author, eventData.specialty, eventData.team_name, eventData.meetup, eventData.note );
+			meetup.addEntry( eventData.author, eventData.specialty, eventData.team_name, eventData.meetup, eventData.explanation );
 		}
 		//{"eventType":"observation_tabulation", "payload":{"team_name":"Luis", "location":"Borneo", "organism_presence":["fig", "civet", "ant" ]}}//
 		private function observation_tabulation( eventData ):void
 		{
 			event_debug.appendText("\n" + eventData.team_name + " identified the presence of " + eventData.organism_presence + " in "+eventData.location +" as present");
+			//cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
 			//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
 			cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
 		}
@@ -188,11 +193,17 @@ package
 		public function set currentTeamSet( value:Array ):void {
 			_currentTeamSet = value;
 		}
-		//STATIC FUNCTIONS
-		public static function stripUnderscore( originalstring:String ):String
+		//
+		public static function stripUnderscores( originalstring:String ):String
 		{
 			var original:Array = originalstring.split("_");
 			return(original.join(" "));
+		}
+		public static function formatColour( mc:MovieClip, new_color:uint=0xFFFFFF ):void
+		{
+			var myColor:ColorTransform = mc.transform.colorTransform;
+			myColor.color = new_color;
+			mc.transform.colorTransform = myColor;
 		}
 	}
 }

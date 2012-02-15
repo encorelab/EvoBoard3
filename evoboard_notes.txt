@@ -11,31 +11,26 @@
 
 organism_observation
 
-{"eventType":"note","payload":{"author":"AlinaMa","team_name":"Darwin","meetup":1,"note":"loldongs","specialty":"plants_and_insects"},"origin":"AlinaMa","timestamp":"2012-02-13T05:44:12.104Z","run":{"name":"michelle-feb-2012-a","created_at":"2012-02-12T16:44:48Z","curnit_id":4,"updated_at":"2012-02-12T16:44:48Z","metadata":{},"id":15}}
-
-
-
-{"eventType":"organism_observation","payload":{"team_name":"Darwin","assigned_organism":"proboscis_monkey","observed_organism":"none","location":"station_c","time":"100 mya"},"origin":"LuisBerman","timestamp":"2012-02-10T23:02:12.762Z","run":{"name":"michelle-feb-2012","created_at":"2012-01-26T22:21:14Z","curnit_id":1,"updated_at":"2012-01-26T22:21:14Z","metadata":{},"id":10}}
 
 {"eventType":"organism_observation","payload":{"team_name":"Darwin","assigned_organism":"proboscis_monkey","observed_organism":"proboscis_monkey","location":"station_c","time":"100 mya"},"origin":"LuisBerman","timestamp":"2012-02-10T23:02:12.762Z","run":{"name":"michelle-feb-2012","created_at":"2012-01-26T22:21:14Z","curnit_id":1,"updated_at":"2012-01-26T22:21:14Z","metadata":{},"id":10}}
 
-{"eventType":"organism_observation","payload":{"time":"200 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
-{"eventType":"organism_observation","payload":{"time":"150 mya","assigned_organism":"proboscis_monkey", "observed_organism":"none","team_name":"Darwin"}}
-{"eventType":"organism_observation","payload":{"time":"100 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
-{"eventType":"organism_observation","payload":{"time":"50 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
-{"eventType":"organism_observation","payload":{"time":"25 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
-{"eventType":"organism_observation","payload":{"time":"10 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
-{"eventType":"organism_observation","payload":{"time":"5 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
-{"eventType":"organism_observation","payload":{"time":"2 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"150mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"100mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"50mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"25mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"10mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"5mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"2mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
 {"eventType":"organism_observation","payload":{"time":"present","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}
 
-{"eventType":"organism_observation","payload":{"time":"200 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Linneaus"}}
-{"eventType":"organism_observation","payload":{"time":"150 mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Linneaus"}}
+{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Linneaus"}}
+{"eventType":"organism_observation","payload":{"time":"150mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Linneaus"}}
 
-{"eventType":"organism_observation","payload":{"time":"150 mya","assigned_organism":"gibbon", "observed_organism":"monkey","team_name":"Darwin"}}
-{"eventType":"organism_observation","payload":{"time":"100 mya","assigned_organism":"gibbon", "observed_organism":"ape","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"150mya","assigned_organism":"gibbon", "observed_organism":"monkey","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"100mya","assigned_organism":"gibbon", "observed_organism":"ape","team_name":"Darwin"}}
 
-{"eventType":"organism_observation","payload":{"time":"50 mya","assigned_organism":"proboscis_monkey", "observed_organism":"prosimians","team_name":"Darwin"}}
+{"eventType":"organism_observation","payload":{"time":"50mya","assigned_organism":"proboscis_monkey", "observed_organism":"prosimians","team_name":"Darwin"}}
 {"eventType":"organism_observation","payload":{"time":"25mya","assigned_organism":"proboscis_monkey", "observed_organism":"first monkeys","team_name":"Darwin"}}
 {"eventType":"organism_observation","payload":{"time":"10mya","assigned_organism":"proboscis_monkey", "observed_organism":"asian colobine","team_name":"Darwin"}}
 {"eventType":"organism_observation","payload":{"time":"5mya","assigned_organism":"proboscis_monkey", "observed_organism":"asian colobine","team_name":"Darwin"}}
@@ -60,8 +55,8 @@ organism_observation
 note
 //meetup:"1"|"2"
 
-{"eventType":"note", "payload":{"author":"Luis", "specialty":"primates", "team_name":"Darwin", "note":"foo", "meetup":1}}
-{"eventType":"note", "payload":{"author":"Amy", "specialty":"plants_and_insects", "team_name":"Linneaus", "explanation":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel aliquam ligula. Maecenas vestibulum laoreet semper. Fusce imperdiet dapibus eros non vulputate. Mauris suscipit, lectus eu imperdiet facilisis, eros eros vehicula ipsum, a tincidunt augue massa a lacus. Aliquam egestas, massa vitae pretium gravida, mauris ligula interdum elit, et aliquet nunc urna vel orci. Aliquam vel libero orci, eu scelerisque augue. Phasellus vel arcu non sapien fringilla consectetur sit amet non est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In molestie tincidunt urna sit amet venenatis. Quisque mollis justo sed nisi bibendum ornare. Fusce diam enim, tincidunt nec dignissim ac, venenatis sed dolor. Morbi lacus ligula, laoreet et commodo eget, tempus id lectus. Nam vestibulum viverra odio, semper aliquet urna venenatis sit amet.", "meetup":2}}
+{"eventType":"note", "payload":{"author":"Luis", "specialty":"primates", "team_name":"Darwin", "note":"foo"}}
+{"eventType":"note", "payload":{"author":"Amy", "specialty":"plants_and_insects", "team_name":"Linneaus", "explanation":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel aliquam ligula. Maecenas vestibulum laoreet semper. Fusce imperdiet dapibus eros non vulputate. Mauris suscipit, lectus eu imperdiet facilisis, eros eros vehicula ipsum, a tincidunt augue massa a lacus. Aliquam egestas, massa vitae pretium gravida, mauris ligula interdum elit, et aliquet nunc urna vel orci. Aliquam vel libero orci, eu scelerisque augue. Phasellus vel arcu non sapien fringilla consectetur sit amet non est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In molestie tincidunt urna sit amet venenatis. Quisque mollis justo sed nisi bibendum ornare. Fusce diam enim, tincidunt nec dignissim ac, venenatis sed dolor. Morbi lacus ligula, laoreet et commodo eget, tempus id lectus. Nam vestibulum viverra odio, semper aliquet urna venenatis sit amet."}}
 
 
 ---
@@ -91,9 +86,3 @@ concept_discussion
 
 
 ---
-orient
-
-{"eventType":"orient","payload":{"time_period":"200 mya"},"origin":"evoboard3","timestamp":"2012-02-13T04:50:12.608Z","run":{"name":"michelle-feb-2012-b","created_at":"2012-02-12T16:44:56Z","curnit_id":4,"updated_at":"2012-02-12T16:44:56Z","metadata":{},"id":16}}
-
-
-

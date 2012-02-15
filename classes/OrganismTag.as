@@ -8,12 +8,11 @@ package classes
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
-	import flash.text.TextFormat;
+	import flash.text.TextFieldAutoSize;
 	
 	public class OrganismTag extends MovieClip
 	{
 		private var _anchorPoint:Point
-		//private var _relativeObject:OrganismTag;	//temporary variable setup for creating a connection object
 		private var _organismName:String;
 		private var _authorName:String;
 		private var _timeLocation:String;
@@ -24,6 +23,8 @@ package classes
 		private var tagGraphic:OrganismTagGraphic;
 		private var label:MovieClip;
 		private var isStatic:Boolean;
+		
+		private var max_width = 100;
 
 		public function OrganismTag( organism_name:String, assigned_organism:String, author_name:String, location:String, rainforest_loc:String="none" )
 		{
@@ -35,33 +36,40 @@ package classes
 			assignedOrganisms = [assigned_organism];
 			anchorPoint = new Point();
 			connections = new Array();
-			drawTag();
-			
+			drawTag();			
 		}
 		private function drawTag():void
 		{
 			tagGraphic = new OrganismTagGraphic();
-			tagGraphic.organism_txt.text = EvoBoard3.stripUnderscore( organismName );
-			//change to display assinged organism
-			tagGraphic.author_txt.text = getAssignedOrganisms();
-			
-			var BoldText:TextFormat = new TextFormat();   
-			BoldText.bold=true;
-			tagGraphic.organism_txt.setTextFormat(BoldText);
-			
-			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 8;
-			tagGraphic.author_txt.width = tagGraphic.author_txt.textWidth + 8;
-			
+			tagGraphic.organism_txt.autoSize = TextFieldAutoSize.LEFT;
+			tagGraphic.organism_txt.text = EvoBoard3.stripUnderscores( organismName );
+			tagGraphic.author_txt.autoSize = TextFieldAutoSize.LEFT;
+			tagGraphic.author_txt.text = EvoBoard3.stripUnderscores( assignedOrganisms.toString() ); //EvoBoard3.stripUnderscores( authorName );			
 			tagGraphic.organism_txt.mouseEnabled = false;
 			tagGraphic.author_txt.mouseEnabled = false;
+					
+			//resizeTagWidth();
 			
 			//find out whether organism TF or author TF is wider
-			var longTFwidth:Number;
-			if ( tagGraphic.organism_txt.textWidth > tagGraphic.author_txt.textWidth ){
-				longTFwidth = tagGraphic.organism_txt.width   	
+			var longTFwidth:Number;			
+			var org_text:String = EvoBoard3.stripUnderscores( organismName );
+			var assigned_org_text:String = EvoBoard3.stripUnderscores( assignedOrganisms.toString() );
+			
+			if ( (org_text.length + 6) > assigned_org_text.length ){
+				tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 4;
+				longTFwidth = tagGraphic.organism_txt.width
 			} else {
+				tagGraphic.author_txt.width	= tagGraphic.author_txt.textWidth + 4;
 				longTFwidth = tagGraphic.author_txt.width
 			}
+			tagGraphic.organism_txt.width = longTFwidth + 4;
+			tagGraphic.author_txt.width = longTFwidth + 4;
+			
+			tagGraphic.bkgd.width = longTFwidth + 20;
+			tagGraphic.glow.width = longTFwidth + 20;
+			tagGraphic.bkgd.alpha = 0.8;
+			formatPoint();
+					
 			if ( rainforest == "Borneo" ){
 				label = new BorneoTag as MovieClip;
 			} else if ( rainforest == "Sumatra" ){
@@ -70,71 +78,83 @@ package classes
 				label = new MovieClip();
 			}
 			
-			tagGraphic.bkgd.width = longTFwidth + 10;
-			tagGraphic.glow.width = longTFwidth + 10;
 			tagGraphic.bkgd.alpha = 0.8;
-			formatPoint();
 			addChild( tagGraphic );
-			addChild( label  );
+			addChild( label );
 			label.x = 4;
 			label.y = 4;
-		}
-		
-		private function resizeTag():void
-		{
-			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 8;
-			tagGraphic.author_txt.width = tagGraphic.author_txt.textWidth + 8;
-			
-			//find out whether organism TF or author TF is wider
-			var longTFwidth:Number;
-			if ( tagGraphic.organism_txt.textWidth > tagGraphic.author_txt.textWidth ){
-				longTFwidth = tagGraphic.organism_txt.width   	
-			} else {
-				longTFwidth = tagGraphic.author_txt.width
-			}
-			
-			tagGraphic.bkgd.width = longTFwidth + 10;
-			tagGraphic.glow.width = longTFwidth + 10;
-			formatPoint();
 		}
 		public function addAuthor( new_author:String, colour:uint ):void
 		{
 			authorName += (", " + new_author );
 			formatColour( colour );
-			tagGraphic.author_txt.text = authorName;
-			resizeTag();
+			//tagGraphic.author_txt.text = authorName;
+			//resizeTagWidth();
 		}
 		public function addAssignedOrg( assigned_org:String ):void
 		{
 			var assigned_org_present:Boolean = false;
+			var new_assigned_org:String;
+			
 			for( var i:uint=0; i < assignedOrganisms.length; i++ ){
 				if ( assignedOrganisms[i] == assigned_org ){  
 					assigned_org_present = true;
 				}
 			}
 			if ( !assigned_org_present ){
-				assignedOrganisms.push( assigned_org );
+				assignedOrganisms.push( EvoBoard3.stripUnderscores( assigned_org ) );
+				new_assigned_org = tagGraphic.author_txt.text + ", " + EvoBoard3.stripUnderscores( assigned_org );
+			} else {
+				new_assigned_org = tagGraphic.author_txt.text;
 			}
-			//tagGraphic.author_txt.text = getAssignedOrganisms();
-			//resizeTag();
-			//trace("assignedOrganisms: "+assignedOrganisms);
+			tagGraphic.author_txt.text = new_assigned_org;
+//			tagGraphic.author_txt.text = assignedOrganisms.toString();
+			resizeTagWidth();
+
+			trace("assignedOrganisms: "+assignedOrganisms);
 		}
 		public function addConnection( c:Connection ):void
 		{
 			connections.push( c );
 		}
-		public function setOutline( colour:uint=0xFF0000 ):void
+		private function resizeTagWidth():void
 		{
-			var thickness = 6;
-			var outline:GlowFilter = new GlowFilter();
-			outline.blurX = outline.blurY = thickness;
-			outline.alpha = 0.8;
-			outline.color = colour;
-			outline.quality = BitmapFilterQuality.HIGH;
-			outline.strength = 20;
-			var filterArray:Array = new Array();
-			filterArray.push(outline);
-			tagGraphic.filters = filterArray;
+			tagGraphic.organism_txt.width = tagGraphic.organism_txt.textWidth + 4;
+			//tagGraphic.author_txt.width = tagGraphic.author_txt.textWidth + 4;
+			
+			if ( tagGraphic.author_txt.numLines > 1 ){
+				resizeTagHeight();
+			}
+				
+			//find out whether organism TF or author TF is wider
+			var longTFwidth:Number;
+			if ( tagGraphic.organism_txt.textWidth > tagGraphic.author_txt.textWidth ){
+				longTFwidth = tagGraphic.organism_txt.width   	
+			} else if ( tagGraphic.organism_txt.textWidth < tagGraphic.author_txt.textWidth  ) {
+				longTFwidth = tagGraphic.author_txt.width;
+			}
+			
+			tagGraphic.bkgd.width = longTFwidth + 20;
+			tagGraphic.glow.width = longTFwidth + 20;
+			
+			formatPoint();
+		}
+		private function resizeTagHeight():void
+		{
+			trace("resizeTagHeight");
+			var maxLines = 3;
+			while( tagGraphic.author_txt.numLines > maxLines){
+				tagGraphic.author_txt.width +=1;
+			}
+
+			tagGraphic.author_txt.height = tagGraphic.author_txt.textHeight;
+			
+			tagGraphic.bkgd.height = tagGraphic.organism_txt.height + tagGraphic.author_txt.height + 10;
+			tagGraphic.glow.height = tagGraphic.organism_txt.height + tagGraphic.author_txt.height + 10;
+			formatPoint();
+			
+			trace("tagGraphic.author_txt.textHeight: "+tagGraphic.author_txt.textHeight);
+			trace("tagGraphic.bkgd.height : "+tagGraphic.bkgd.height );
 		}
 		public function formatColour( new_color:uint=0xFFFFFF ):void
 		{
@@ -146,14 +166,6 @@ package classes
 		{
 			anchorPoint.x = tagGraphic.width/2;
 			anchorPoint.y = tagGraphic.height/2;
-		}
-		private function getAssignedOrganisms():String
-		{
-			var assignedOrgs:String = assignedOrganisms[0];
-			for ( var i:uint=0; i < assignedOrganisms.length-1; i++) {
-				assignedOrgs += ", " + assignedOrganisms[i+1];
-			}
-			return assignedOrgs;
 		}
 		public function setBoundaries( x_value:Number, y_value:Number, width_value:Number, height_value:Number):void
 		{

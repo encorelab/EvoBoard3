@@ -15,12 +15,12 @@ package classes
 		private var x_pos:Number 		= 10;
 		private var y_pos:Array 		= [518, 600, 690];
 		
-		public function LegendBox( list_names:Array ):void
+		public function LegendBox( list_names:Array, add_both:Boolean=false ):void
 		{
 			drawBkgd();
-			addLegendItems( list_names );
+			addLegendItems( list_names, add_both );
 		}
-		private function addLegendItems( item_names ):void
+		private function addLegendItems( item_names:Array, add_both:Boolean ):void
 		{
 			legendItems = new Array();
 			
@@ -28,8 +28,9 @@ package classes
 				addItem( item_names[i], EvoBoard3.colour_set[i], y_pos[i] );
 			}
 			//Add both
-			addItem( "Both", EvoBoard3.colour_set[2], y_pos[2] );
-			
+			if ( add_both ){
+				addItem( "Both", EvoBoard3.colour_set[2], y_pos[2] );
+			}
 		}
 		
 		private function addItem( item_name:String, item_colour:uint, ypos:Number ):void
