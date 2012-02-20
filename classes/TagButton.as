@@ -13,7 +13,7 @@ package classes
 		
 		public function TagButton( label:String )
 		{
-			trace( "tag button instantiated" );
+			//trace( "tag button instantiated" );
 			
 			tagTF = this.tag_txt;
 			tagBtn = this.tag_btn;
@@ -28,8 +28,8 @@ package classes
 			tagTF.wordWrap = false;
 			tagTF.text = label;
 			tagBtn.alpha = 0.5;
-			trace("tagTF.textWidth: "+tagTF.textWidth);
-			trace("tagTF.width: "+tagTF.width);
+			//trace("tagTF.textWidth: "+tagTF.textWidth);
+			//trace("tagTF.width: "+tagTF.width);
 			
 				
 			//tagTF.width = tagTF.textWidth + 10;

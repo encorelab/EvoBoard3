@@ -82,7 +82,7 @@ organism_features
 concept_discussion
 
 //conceptsDisplay.addEntry( eventData.author, eventData.concept, eventData.organism, eventData.time, eventData.explanation );
-{"eventType":"concept_discussion", "payload":{"author":"Luis", "concept":"Natural selection", "time":["200mya"], "organism":["fig"], "explanation":"foo"}}
+{"eventType":"concept_discussion", "payload":{"author":"Luis", "concept":"natural selection", "time":["200mya"], "organism":["fig"], "explanation":"foo"}}
 
 
 ---

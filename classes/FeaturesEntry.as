@@ -36,7 +36,7 @@ package classes
 			BoldText.bold=true;
 			noteGraphic.organism_txt.setTextFormat(BoldText);
 			
-			trace("explanation.length: "+explanation.length);
+			//trace("explanation.length: "+explanation.length);
 			if ( explanation.length > 200 ){
 				setupExpandButton();
 			} else {
@@ -61,7 +61,7 @@ package classes
 		public override function resizeExplanation():void
 		{
 			//super.resizeExplanation();
-			trace( "resizeExplanation" );
+			//trace( "resizeExplanation" );
 			noteGraphic.explanation_txt.autoSize = TextFieldAutoSize.LEFT;
 			noteGraphic.explanation_txt.text = explanation;
 			noteGraphic.explanation_txt.height = noteGraphic.explanation_txt.textHeight + 8;	
@@ -73,9 +73,9 @@ package classes
 			noteGraphic.organism_txt.autoSize = TextFieldAutoSize.LEFT;
 			noteGraphic.organism_txt.width = noteGraphic.author_txt.textWidth + 4;
 			
-			trace( "explation text width: "+ noteGraphic.explanation_txt.textWidth );
-			trace( "organism text width: "+ noteGraphic.organism_txt.textWidth );
-			trace( "author text width: "+ noteGraphic.author_txt.textWidth );
+			//trace( "explation text width: "+ noteGraphic.explanation_txt.textWidth );
+			//trace( "organism text width: "+ noteGraphic.organism_txt.textWidth );
+			//trace( "author text width: "+ noteGraphic.author_txt.textWidth );
 						
 			//find out whether organism TF or author TF is wider
 			var longTFwidth:Number;
@@ -117,7 +117,7 @@ package classes
 		}
 		public function handleOrgBtnClick( e:MouseEvent ):void
 		{
-			trace("click");
+			//trace("click");
 			dispatchEvent( new CustomEvent( noteGraphic.organism_txt.text, CustomEvent.CLICK ));
 		}
 		public function get organism():String {

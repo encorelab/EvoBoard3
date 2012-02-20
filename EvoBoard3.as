@@ -33,18 +33,19 @@ package
 		public static var concept_colours:Array = [ 0xF0B623, 0xFA9643, 0x14A99D, 0x8EC447, 0xFE9897, 0x00CCFF, 0xCCFFCC, 0x9ADD8D, 0x007EDD ]; //green, blue, aqua, teal, lime, orange
 		public static var team_set1:Array = ["Darwin", "Linneaus"];
 		public static var team_set2:Array = ["Lamarck", "Wallace"];
-		public static var team_set3:Array = ["Mendel", "Lyell", "Fischer"];
-		public static var team_set4:Array = ["Buffon", "Malthus", "Huxley"];
+		public static var team_set3:Array = ["Mendel", "Lyell"];
+		public static var team_set4:Array = ["Malthus", "Huxley"];
 		public static var concept_list:Array = ["adaptation","bottleneck","coevolution","founder effect","gene flow","natural selection","reproductive isolation","sexual selection","other"];
 		public static var borneoID:String = "Borneo";
 		public static var sumatraID:String = "Sumatra";
+		public static var time_set:Array = ["200 mya", "150 mya", "100 mya", "50 mya", "25 mya", "10 mya", "5 mya", "2 mya"];
 		
 		public function EvoBoard3()
 		{
 			event_debug = event_debug_txt;
 			event_debug.text = "Waiting for event...";		
 			version_num = versionNum_txt;
-			version_num.text = "Feb 16, 2012 v1";
+			version_num.text = "Feb 20, 2012 v1";
 			ExternalInterface.addCallback("sevToFlash", handleSev );
 						
 			//for Day 1 - STEP1
@@ -106,14 +107,14 @@ package
 				//e.keyCode: 87
 				//e.keyCode: 69
 				//e.keyCode: 82
-				conceptsDisplay.addEntry( "Luis", "Natural selection", ["200 mya", "150 mya"], ["sumatran_striped_rabbit", "fig tree", "sumatran_striped_rabbit", "fig tree", "sumatran_striped_rabbit", "fig tree", "sumatran_striped_rabbit", "fig tree", "sumatran_striped_rabbit", "fig tree"], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac tempus ante. Fusce congue viverra nisi, fringilla hendrerit magna semper at. Nullam massa tortor, tempus non mattis ut, varius ut massa. Aliquam posuere eros in turpis pulvinar ac molestie mauris commodo. Ut sem sapien, mollis in blandit elementum, bibendum vitae est. Curabitur lacus velit, blandit sit amet accumsan id, posuere rhoncus ligula. Nam et rhoncus lectus. Curabitur et ipsum non sapien luctus accumsan non a eros. Nulla non nisl ipsum. Etiam in neque non nibh bibendum tincidunt.");
+				conceptsDisplay.addEntry( "Luis", "natural selection", ["200 mya", "150 mya", "100 mya", "50 mya", "25 mya"], ["sumatran_striped_rabbit", "fig tree", "fig wasp", "oranutan", "tiger", "hornbill", "jambu tree", "bee", "tapir", "flower"], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac tempus ante. Fusce congue viverra nisi, fringilla hendrerit magna semper at. Nullam massa tortor, tempus non mattis ut, varius ut massa. Aliquam posuere eros in turpis pulvinar ac molestie mauris commodo. Ut sem sapien, mollis in blandit elementum, bibendum vitae est. Curabitur lacus velit, blandit sit amet accumsan id, posuere rhoncus ligula. Nam et rhoncus lectus. Curabitur et ipsum non sapien luctus accumsan non a eros. Nulla non nisl ipsum. Etiam in neque non nibh bibendum tincidunt.");
 
 				//features.addEntry("Luis", "Darwin", "primates", "foo");
 				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
 				//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
 				//cladogram.addPresentEntry("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
 			} else if ( e.keyCode == 87 ){
-				conceptsDisplay.addEntry( "Amy", "Sexual selection", ["50 mya", "10 mya"], ["monkey", "fig tree"], "foo" )
+				conceptsDisplay.addEntry( "Amy", "sexual selection", ["50 mya", "10 mya"], ["monkey", "fig tree"], "foo" )
 				//cladogram.addEntry("proboscis_monkey", "proboscis_monkey", "Darwin", "2 mya");
 				//features.addEntry("Luis", "Darwin", "primates", "foo");
 			}

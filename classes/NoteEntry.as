@@ -51,7 +51,7 @@ package classes
 			noteGraphic.explanation_txt.text = explanation;
 			noteGraphic.author_txt.text = author;
 			
-			trace("explanation.length: "+explanation.length);
+			//trace("explanation.length: "+explanation.length);
 			if ( explanation.length > 200 ){
 				setupExpandButton();
 			} else {
@@ -61,7 +61,7 @@ package classes
 		}
 		public function resizeExplanation():void
 		{
-			trace( "resizeExplanation" );
+			//trace( "resizeExplanation" );
 			noteGraphic.explanation_txt.autoSize = TextFieldAutoSize.LEFT;
 			noteGraphic.explanation_txt.text = explanation;
 			noteGraphic.explanation_txt.height = noteGraphic.explanation_txt.textHeight + 8;	
@@ -104,7 +104,7 @@ package classes
 		}
 		public function setupExpandButton():void
 		{
-			trace( "setupExpandButton" );
+			//trace( "setupExpandButton" );
 			positionExpandButton();
 			expandButton.addEventListener( CustomEvent.EXPAND, handleExpandButton );
 			addChild( expandButton );
@@ -177,8 +177,8 @@ package classes
 		//EVENT HANDLERS
 		private function handleExpandButton( e:CustomEvent ):void
 		{
-			trace("handleExpandButton");
-			trace("expanded: "+expanded);
+			//trace("handleExpandButton");
+			//trace("expanded: "+expanded);
 			var expanded = e.customObject as Boolean;
 			if( expanded ){
 				//expand

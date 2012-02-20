@@ -35,60 +35,88 @@ package classes
 			hit = noteGraphic.hit;
 			hit.addEventListener(MouseEvent.MOUSE_DOWN, handleClick);
 			hit.addEventListener(MouseEvent.MOUSE_UP, handleRelease);
+			hit.buttonMode = true;
 			
+			noteGraphic.organism_txt.text = concept;
+			noteGraphic.explanation_txt.text = explanation;
+			noteGraphic.author_txt.text = organismTags.toString() + "," + timeTags.toString();
+			var BoldText:TextFormat = new TextFormat();   
+			BoldText.bold=true;
+			noteGraphic.organism_txt.setTextFormat(BoldText);
+			
+			if ( explanation.length > 200 ){
+				setupExpandButton();
+				resetExplanation();
+			} else {
+				resizeExplanation();
+			}
+			
+			formatColour( colour );
+		}
+		public override function resizeExplanation():void
+		{
+			noteGraphic.explanation_txt.autoSize = TextFieldAutoSize.LEFT;
 			noteGraphic.explanation_txt.multiline = true;			
 			noteGraphic.explanation_txt.text = explanation;
+			
 			noteGraphic.author_txt.autoSize = TextFieldAutoSize.LEFT;
+			noteGraphic.author_txt.multiline = true;
+			noteGraphic.author_txt.wordWrap = true;
 			noteGraphic.author_txt.text = organismTags.toString() + "," + timeTags.toString();
+			
+			noteGraphic.organism_txt.autoSize = TextFieldAutoSize.LEFT;
 			noteGraphic.organism_txt.text = concept;
 			var BoldText:TextFormat = new TextFormat();   
 			BoldText.bold=true;
 			noteGraphic.organism_txt.setTextFormat(BoldText);
 			
-			//find out whether organism TF or author TF is wider
-			var longTFwidth:Number;			
-			var tags_text:String = organismTags.toString() + "," + timeTags.toString();
-			var concept_text:String = concept;
-			var explain_text:String = explanation;
+			//find out whether organism TF or explanation TF is wider, then make that the TF width
+			var longTFwidth:Number;
+			if ( noteGraphic.explanation_txt.length > noteGraphic.organism_txt.length || noteGraphic.explanation_txt.length > noteGraphic.author_txt.length ){				
+				longTFwidth = noteGraphic.explanation_txt.width;
+				trace( "longTFwidth = explanation_txt.width = " + longTFwidth );
+			} else if ( noteGraphic.organism_txt.length > noteGraphic.author_txt.length || noteGraphic.organism_txt.length > noteGraphic.explanation_txt.length ){
+				longTFwidth = noteGraphic.organism_txt.width;
+				trace( "longTFwidth = concept_txt.width = " + longTFwidth );
+			} else {
+				longTFwidth = default_TFwidth;
+				trace( "longTFwidth = default_TFwidth" );
+			}
+			
+			noteGraphic.explanation_txt.width = longTFwidth + 4;
 			noteGraphic.organism_txt.width = longTFwidth + 4;
 			noteGraphic.author_txt.width = longTFwidth + 4;
 			
-			/*if ( (concept_text.length + 6) > tags_text.length || (explain_text.length + 6) > tags_text.length  ){
-				resizeTagHeight();
-			}*/ 
-			resizeTagHeight();
+			//adjust width to longTFwidth
+			noteGraphic.bkgd.width = longTFwidth + 20;
+			noteGraphic.glow.width = longTFwidth + 20;
+			noteGraphic.hit.width = longTFwidth + 20;
 			
-			/*trace("explanation.length: "+explanation.length);
-			if ( explanation.length > 200 ){
-				setupExpandButton();
-			} else {
-				resizeExplanation();
-			}*/
-			formatColour( colour );
-			
-			orgBtn = new SquareBox() as MovieClip;
-			addChild( orgBtn );
-			orgBtn.x = noteGraphic.organism_txt.x;
-			orgBtn.y = noteGraphic.organism_txt.y;
-			orgBtn.width = noteGraphic.organism_txt.width;
-			orgBtn.height = noteGraphic.organism_txt.height;
-			orgBtn.alpha = 0;
-			orgBtn.addEventListener( MouseEvent.CLICK, handleOrgBtnClick );
+			//adjust heights as necessary
+			noteGraphic.author_txt.y = noteGraphic.explanation_txt.y + noteGraphic.explanation_txt.height;
+			noteGraphic.bkgd.height = noteGraphic.author_txt.height + noteGraphic.author_txt.y + 10;
+			noteGraphic.glow.height = noteGraphic.author_txt.height + noteGraphic.author_txt.y + 10;
+			noteGraphic.hit.height = noteGraphic.author_txt.height + noteGraphic.author_txt.y + 10;
+			positionExpandButton();
 		}
-		private function resizeTagHeight():void
+		public override function resetExplanation():void
 		{
-			trace("resizeTagHeight");
-			var maxLines = 3;
-			while( noteGraphic.author_txt.numLines > maxLines){
-				noteGraphic.author_txt.width +=1;
-			}
+			noteGraphic.explanation_txt.autoSize = TextFieldAutoSize.NONE;
+			noteGraphic.explanation_txt.height = default_TFheight;
+			noteGraphic.explanation_txt.width = default_TFwidth;
 			
-			noteGraphic.author_txt.height = noteGraphic.author_txt.textHeight;
-			noteGraphic.bkgd.height = noteGraphic.organism_txt.height + noteGraphic.author_txt.height + noteGraphic.explantion_txt + 10;
-			noteGraphic.glow.height = noteGraphic.organism_txt.height + noteGraphic.author_txt.height + noteGraphic.explantion_txt + 10;
+			noteGraphic.author_txt.autoSize = TextFieldAutoSize.NONE;
+			noteGraphic.author_txt.multiline = false;
+			noteGraphic.author_txt.height = 20;
+			noteGraphic.author_txt.y = noteGraphic.explanation_txt.y + noteGraphic.explanation_txt.height - 4;
 			
-			trace("tagGraphic.author_txt.textHeight: "+ noteGraphic.author_txt.textHeight);
-			trace("tagGraphic.bkgd.height : "+ noteGraphic.bkgd.height );
+			noteGraphic.bkgd.width = default_width;
+			noteGraphic.glow.width = default_width;
+			noteGraphic.hit.width = default_width;
+			noteGraphic.bkgd.height = default_height;
+			noteGraphic.glow.height = default_height;
+			noteGraphic.hit.height = default_height;
+			positionExpandButton();
 		}
 		public function tagMatch( item:String ):Boolean
 		{
