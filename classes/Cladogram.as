@@ -99,7 +99,10 @@ package classes
 					//if team name is the same then don't change, if team name is different then change
 					//trace( organism_list[i].authorName.indexOf(team_name) );
 					if ( organism_list[i].authorName.indexOf(team_name) == -1){  
-						organism_list[i].addAuthor( team_name, getColor( team_name, organism_list[i]) );
+						organism_list[i].addAuthor( team_name, getColor( team_name, organism_list[i]));
+					}
+					if ( organism_list[i].rainforest != rain_forest ){
+						organism_list[i].addRainforest( rain_forest );
 					}
 					organism_list[i].addAssignedOrg( assigned_organism );
 					setupConnection( organism_list[i], assigned_organism, team_name, time_location );

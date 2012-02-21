@@ -20,8 +20,10 @@ package classes
 		private var _connections:Array;
 		private var _boundsRectangle:Rectangle;
 		private var _rainforest:String;
+		private var _rainforest2:String;
 		private var tagGraphic:OrganismTagGraphic;
 		private var label:MovieClip;
+		private var label2:MovieClip;
 		private var isStatic:Boolean;
 		
 		private var max_width = 100;
@@ -72,24 +74,44 @@ package classes
 					
 			if ( rainforest == EvoBoard3.borneoID ){
 				label = new BorneoTag as MovieClip;
+				label.x = 4;
 			} else if ( rainforest == EvoBoard3.sumatraID ){
 				label = new SumatraTag as MovieClip;
+				label.x = tagGraphic.width;
 			} else {
 				label = new MovieClip();
 			}
-			
 			tagGraphic.bkgd.alpha = 0.8;
 			addChild( tagGraphic );
 			addChild( label );
-			label.x = 4;
 			label.y = 4;
 		}
-		public function addAuthor( new_author:String, colour:uint ):void
+		public function addAuthor( new_author:String, colour:uint, rain_forest:String ):void
 		{
+			trace("addAuthor: "+rain_forest);
 			authorName += (", " + new_author );
 			formatColour( colour );
 			//tagGraphic.author_txt.text = authorName;
 			//resizeTagWidth();
+		}
+		public function addRainforest( rain_forest:String ):void
+		{
+			trace("addRainforest");
+			trace("rainforest: "+ rainforest );
+			trace("rain_forest: "+rain_forest);
+			if ( rainforest != rain_forest ){
+				if ( rain_forest == EvoBoard3.borneoID ){
+					label2 = new BorneoTag as MovieClip;
+					label2.x = 4;
+					label2.y = 4;
+					addChild(label2);
+				} else if ( rain_forest == EvoBoard3.sumatraID ){
+					label2 = new SumatraTag as MovieClip;
+					label2.x = tagGraphic.width;
+					label2.y = 4;
+					addChild(label2);
+				}
+			}	
 		}
 		public function addAssignedOrg( assigned_org:String ):void
 		{
@@ -206,6 +228,12 @@ package classes
 		}
 		public function set rainforest( value:String ):void {
 			_rainforest = value;
+		}
+		public function get rainforest2():String {
+			return _rainforest2;
+		}
+		public function set rainforest2( value:String ):void {
+			_rainforest2 = value;
 		}
 		public function get assignedOrganisms():Array {
 			return _assignedOrganisms;

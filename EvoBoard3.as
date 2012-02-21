@@ -107,16 +107,16 @@ package
 				//e.keyCode: 87
 				//e.keyCode: 69
 				//e.keyCode: 82
-				conceptsDisplay.addEntry( "Luis", "natural selection", ["200 mya", "150 mya", "100 mya", "50 mya", "25 mya"], ["sumatran_striped_rabbit", "fig tree", "fig wasp", "oranutan", "tiger", "hornbill", "jambu tree", "bee", "tapir", "flower"], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac tempus ante. Fusce congue viverra nisi, fringilla hendrerit magna semper at. Nullam massa tortor, tempus non mattis ut, varius ut massa. Aliquam posuere eros in turpis pulvinar ac molestie mauris commodo. Ut sem sapien, mollis in blandit elementum, bibendum vitae est. Curabitur lacus velit, blandit sit amet accumsan id, posuere rhoncus ligula. Nam et rhoncus lectus. Curabitur et ipsum non sapien luctus accumsan non a eros. Nulla non nisl ipsum. Etiam in neque non nibh bibendum tincidunt.");
-
+				//conceptsDisplay.addEntry( "Luis", "natural selection", ["200 mya", "150 mya", "100 mya", "50 mya", "25 mya"], ["sumatran_striped_rabbit", "fig tree", "fig wasp", "oranutan", "tiger", "hornbill", "jambu tree", "bee", "tapir", "flower"], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac tempus ante. Fusce congue viverra nisi, fringilla hendrerit magna semper at. Nullam massa tortor, tempus non mattis ut, varius ut massa. Aliquam posuere eros in turpis pulvinar ac molestie mauris commodo. Ut sem sapien, mollis in blandit elementum, bibendum vitae est. Curabitur lacus velit, blandit sit amet accumsan id, posuere rhoncus ligula. Nam et rhoncus lectus. Curabitur et ipsum non sapien luctus accumsan non a eros. Nulla non nisl ipsum. Etiam in neque non nibh bibendum tincidunt.");
 				//features.addEntry("Luis", "Darwin", "primates", "foo");
 				//cladogram.addPresentEntry("Darwin", ["proboscis_monkey", "civet", "ant" ], "Borneo");
 				//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
-				//cladogram.addPresentEntry("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
+				cladogram.addPresentEntry("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Borneo");
 			} else if ( e.keyCode == 87 ){
-				conceptsDisplay.addEntry( "Amy", "sexual selection", ["50 mya", "10 mya"], ["monkey", "fig tree"], "foo" )
+				//conceptsDisplay.addEntry( "Amy", "sexual selection", ["50 mya", "10 mya"], ["monkey", "fig tree"], "foo" )
 				//cladogram.addEntry("proboscis_monkey", "proboscis_monkey", "Darwin", "2 mya");
 				//features.addEntry("Luis", "Darwin", "primates", "foo");
+				cladogram.addPresentEntry("Darwin", [{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}], "Sumatra");
 			}
 		}
 		//{"eventType":"organism_observation","payload":{"time":"200mya","assigned_organism":"proboscis_monkey", "observed_organism":"monkey","team_name":"Darwin"}}	
@@ -138,7 +138,7 @@ package
 			event_debug.appendText("\n" + eventData.team_name + " identified the presence of " + eventData.organism_presence + " in "+eventData.island +" as present");
 			//cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
 			//{"eventType":"observation_tabulation","payload":{"team_name":"Darwin","location":"station_a","organism_presence":[{"organism":"proboscis_monkey","is_present":"yes"},{"organism":"muellers_gibbon","is_present":"yes"},{"organism":"white_fronted_langur","is_present":"no"}]}}
-			cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.location );
+			cladogram.addPresentEntry( eventData.team_name, eventData.organism_presence, eventData.island );
 		}
 		//{"eventType":"note", "payload":{"author":"Luis", "organism":"civet", "team_name":"Darwin", "note":"foo"}}
 		private function organism_features( eventData ):void
