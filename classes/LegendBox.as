@@ -13,10 +13,11 @@ package classes
 		
 		private var bkgd_width:Number 	= 40;
 		private var x_pos:Number 		= 10;
-		private var y_pos:Array 		= [518, 600, 690];
+		private var y_pos:Array;
 		
 		public function LegendBox( list_names:Array, add_both:Boolean=false ):void
 		{
+			y_pos = [EvoBoard3.stage_height-250, EvoBoard3.stage_height-168, EvoBoard3.stage_height-78];
 			drawBkgd();
 			addLegendItems( list_names, add_both );
 		}
