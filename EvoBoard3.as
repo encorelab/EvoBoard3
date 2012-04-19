@@ -25,9 +25,9 @@ package
 		
 		private var _currentTeamSet:Array;
 		
-		public static  var stage_width = 1280;
-		public static var stage_height = 1024;
-		public static var colour_set:Array = [ 0x00FF99, 0x00CCFF, 0x66FFFF, 0x14A99D, 0x8EC447, 0xFFCC66 ]; //green, blue, aqua, teal, lime, orange
+		public static  var stage_width = 1024;
+		public static var stage_height = 768;
+		public static var colour_set:Array = [0x00FF99, 0x00CCFF, 0x66FFFF, 0x14A99D, 0x8EC447, 0xFFCC66 ]; //green, blue, aqua, teal, lime, orange
 		public static var concept_colours:Array = [ 0xF0B623, 0xFA9643, 0x14A99D, 0x8EC447, 0xFE9897, 0x00CCFF, 0xCCFFCC, 0x9ADD8D, 0x007EDD ]; //green, blue, aqua, teal, lime, orange
 		public static var team_set1:Array = ["Darwin", "Linneaus"];
 		public static var team_set2:Array = ["Lamarck", "Wallace"];
@@ -43,7 +43,7 @@ package
 			event_debug = event_debug_txt;
 			event_debug.text = "Waiting for event...";		
 			version_num = versionNum_txt;
-			version_num.text = "Apr 19 2012 v1";
+			version_num.text = "Apr 19 2012 v2";
 			ExternalInterface.addCallback("sevToFlash", handleSev );
 						
 			//for Day 1 - STEP1
